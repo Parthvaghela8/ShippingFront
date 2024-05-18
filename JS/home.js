@@ -1,6 +1,70 @@
 import { checkAndSetToken, parseTokenFromUrl, GitLogin, GitFech } from './login.js';
 import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { addUser } from './createUser.js';
+import { addCustomer } from './getCustomer.js';
+import { addShipper } from './getShipper.js';
 
+async function addUserAndFetchDetails(email) {
+    try {
+      // Attempt to add user and get the userId
+      const userId = await addUser(email);
+      
+      // Ensure userId is defined before proceeding
+      if (!userId) {
+        throw new Error('User ID is undefined or null');
+      }
+      localStorage.setItem('userId',userId);
+      console.log('Fetched User ID:', userId);
+      
+      // Proceed to add customer using the fetched userId
+     
+      const customerData = await addCustomer(userId);
+
+      
+      return customerData;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }
+
+
+  async function addShipperAndFetchDetails(email) {
+    try {
+      // Attempt to add user and get the userId
+      const userId = await addUser(email);
+      
+      // Ensure userId is defined before proceeding
+      if (!userId) {
+        throw new Error('User ID is undefined or null');
+      }
+      localStorage.setItem('userId', userId);
+      console.log('Fetched User ID:', userId);
+      
+      // Proceed to add shipper using the fetched userId
+     
+      const shipperData = await addShipper(userId)
+      .then(shipperId => {
+          // Handle the shipper ID
+          console.log('Shipper ID:', shipperId);
+          localStorage.setItem('shipperId', shipperId);
+          // Proceed with further actions
+      })
+      .catch(error => {
+          // Handle errors
+          console.error('Error:', error);
+      });
+
+      
+      return shipperData;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+}
+
+  
+  
 async function start() {
     const code = await parseTokenFromUrl();
 
@@ -78,19 +142,52 @@ async function start() {
 
     if (localStorage.getItem('token') && localStorage.getItem('flag') && localStorage.getItem('userEmail')) {
         console.log("Please Redirect Me Baby");
+        const email = localStorage.getItem('userEmail');
+        // const email="123@email.com"
         if (localStorage.getItem('flag') == 0) {
 
             // login();   
             console.log("customer")
 
+            // Replace 'your-email@example.com' with the email you want to fetch
+            
 
-            window.location.href = "./JS/costomer.html"
+            // Fetch the user data using the email
+            addUserAndFetchDetails(email)
+            .then(customerId => {
+              console.log('customerId:', customerId);
+              localStorage.setItem('customerId', customerId);
+              window.location.href='./js/costomer.html'
+              // Handle the user ID here
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              // Handle errors here
+            });;
+
+        
+
+
+
+
+            // window.location.href = "./JS/costomer.html"
         }
         else {
             // login();
             console.log("shipper")
 
-            window.location.href = "./JS/Shipper.html"
+            addShipperAndFetchDetails(email)
+            .then(shipperId => {
+              console.log('shipperId:', shipperId);
+              localStorage.setItem('shipperId', shipperId);
+              // Handle the user ID here
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              // Handle errors here
+            });;
+
+            // window.location.href = "./JS/Shipper.html"
         }
     }
     
