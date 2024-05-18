@@ -1,0 +1,84 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/home.css">
+    <link rel="stylesheet" href="./CSS/navbar.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/popup.css">
+    <title>ShippingWars - Shipper</title>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-logo" onclick="loadAllShipments()">
+                <img src="./assets/image/logo.png" height="90vh" class="logo" alt="Logo">
+            </div>
+            <h1>Shipper</h1>
+            <ul class="navbar-menu">
+                <li onclick="loadAllShipments()"><a>ALL shipments</a></li>
+                <!-- <li onclick="loadAddShipments()"><a>ADD shipments</a></li> -->
+                <li onclick="loadYourShipments()"><a>Your Shipments</a></li>
+                <li onclick="logout()"><a>Logout</a></li>
+            </ul>
+            <div class="navbar-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content-container">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ShippingWars. All rights reserved.</p>
+    </footer>
+
+    <script src="./JS/home.js"></script>
+    <script src="./JS/navbar.js"></script>
+    <script src="./JS/index.js"></script>
+    <script src="./JS/shipment.js"></script>
+    <script src="./JS/submitBid.js"></script>
+    <script src="./JS/shipmentform.js"></script>
+    <script src="./JS/addshipments.js"></script>
+    <script src="./JS/popup.js"></script>
+    <script src="./JS/login.js"></script>
+
+    <script>
+        function loadAllShipments() {
+            document.getElementById('content-container').innerHTML = '<h2>All Shipments</h2><p>Loading all shipments...</p>';
+            // Add your logic here to load all shipments
+        }
+
+        function loadAddShipments() {
+            document.getElementById('content-container').innerHTML = '<h2>Add Shipment</h2><p>Loading shipment form...</p>';
+            // Add your logic here to load the add shipment form
+        }
+
+        function loadYourShipments() {
+            document.getElementById('content-container').innerHTML = '<h2>Your Shipments</h2><p>Loading your shipments...</p>';
+            // Add your logic here to load user's shipments
+        }
+
+        function logout() {
+          
+            localStorage.clear();
+
+            // Clear session storage
+            sessionStorage.clear();
+
+            alert('Logging out...');
+
+            window.location.href = "http://127.0.0.1:5500/";
+        }
+    </script>
+</body>
+
+</html>
