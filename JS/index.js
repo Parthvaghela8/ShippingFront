@@ -85,5 +85,5 @@ function AllShipments() {
         .catch(error => console.error('Error fetching data:', error));
 }
 
-AllShipments()
+// AllShipments()
 
