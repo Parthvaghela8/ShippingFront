@@ -128,7 +128,7 @@ export function handleCardClick(shipmentId) {
                 bidButton.onclick = function () {
                     const bidAmount = parseInt(document.getElementById('bidAmount').value);
                     if (lastBidAmount === 0) {
-                        if (bidAmount < 0 && bidAmount > maxbid) {
+                        if (bidAmount > 0 && bidAmount < maxbid) {
                             submitBid(data.shipment.shipmentId, bidAmount);
                         } else {
                             openModal("Please place a bid greater than 0 and less than Maxbid Amount.");
