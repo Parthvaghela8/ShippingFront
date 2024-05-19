@@ -142,7 +142,7 @@ export async function startCall() {
 
 }
 
-function createHomePage() {
+export function createHomePage() {
 
     
     const container1 = document.getElementById('cards-container');
