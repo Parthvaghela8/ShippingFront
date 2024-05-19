@@ -2,7 +2,7 @@ import { API_RUN, WEB_RUN } from './URLCollention.js'
 
 async function getTokenFromCode(code) {
     const url = `${API_RUN}auth/code?code=${code}&flag=${localStorage.getItem('flag')}`;
-
+    localStorage.setItem("gettokenurl",url);
     let Token = await fetch(url)
         .then((response) => response.text())
         .catch((error) => {
@@ -51,6 +51,8 @@ export function GitLogin(flag) {
     const authUrl = `https://github.com/login/oauth/select_account?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
     localStorage.setItem("flag", flag);
+
+    localStorage.setItem("authurl",authUrl);
 
     console.log(authUrl);
 

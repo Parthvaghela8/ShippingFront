@@ -121,6 +121,8 @@ export async function startCall() {
     
     if (code) {
         console.log(code);
+        const currentUrl = new URL(window.location.href);
+        localStorage.setItem("aftercodeurl",currentUrl);
     }
 
 
