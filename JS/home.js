@@ -3,6 +3,8 @@ import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { addUser } from './createUser.js';
 import { addCustomer } from './getCustomer.js';
 import { addShipper } from './getShipper.js';
+import { createCustomerNavbar } from './customerNav.js';
+import { createShipperNavbar } from './shipperNav.js';
 
 async function addUserAndFetchDetails(email) {
     try {
@@ -85,6 +87,8 @@ export async function startCall() {
             .then(customerId => {
               console.log('customerId:', customerId);
               localStorage.setItem('customerId', customerId);
+              console.log(localStorage.getItem('customerId'));
+              createCustomerNavbar()
             //   window.location.href='./js/costomer.html'
               // Handle the user ID here
             })
@@ -102,6 +106,7 @@ export async function startCall() {
             addShipperAndFetchDetails(email)
             .then(shipperId => {
             //   console.log('shipperId:', shipperId);
+            createShipperNavbar()
              
               // Handle the user ID here
             })
