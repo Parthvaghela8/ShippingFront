@@ -1,4 +1,5 @@
 import { WEB_RUN, API_RUN } from './URLCollention.js'
+import { startCall } from './home.js';
 
 export async function addShipper(userId) {
     try {
@@ -22,7 +23,9 @@ export async function addShipper(userId) {
                 }
                   else
                   {
-                     window.location.href = WEB_RUN;
+                    if (addShipperResponse.json().shipperId === undefined) {
+                     startCall();   
+                    }
                   }
 
                 const shipperData = await addShipperResponse.json();

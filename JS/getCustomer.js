@@ -1,4 +1,5 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { startCall } from './home.js';
 
 export async function addCustomer(userId) {
     try {
@@ -20,10 +21,12 @@ export async function addCustomer(userId) {
           if (!addCustomerResponse.ok) {
             throw new Error('Failed to add Customer');
           }
-        //   else
-        //   {
-        //      window.location.href = WEB_RUN;
-        //   }
+          else
+          {
+            if (addCustomerResponse.json().customerId === undefined) {
+                startCall();   
+             }
+          }
   
           const customerData = await addCustomerResponse.json();
           console.log('Add Customer Response Data:', customerData); // Additional logging

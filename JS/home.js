@@ -65,7 +65,7 @@ async function addUserAndFetchDetails(email) {
 
   
   
-async function start() {
+export async function startCall() {
     const code = await parseTokenFromUrl();
 
     if (localStorage.getItem('token') && localStorage.getItem('flag') && localStorage.getItem('userEmail')) {
@@ -217,7 +217,7 @@ if(localStorage.getItem('userEmail')=== null)
 }
 
 // Call start to initiate the logic
-start();
+startCall();
 
 
 
