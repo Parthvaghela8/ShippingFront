@@ -1,3 +1,6 @@
+import { WEB_RUN } from "./URLCollention.js";
+import { createHomePage, startCall } from "./home.js";
+
 export function logout() {
           
     localStorage.clear();
@@ -7,5 +10,12 @@ export function logout() {
 
     alert('Logging out...');
 
-    window.location.href = "http://127.0.0.1:5500/";
+    // window.location.href = WEB_RUN;
+    
+    const navbarContainer = document.querySelector('.navbar');
+    navbarContainer.innerHTML = '';
+
+    createHomePage()
+
+    // startCall();
 }
