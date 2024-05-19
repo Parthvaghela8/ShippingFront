@@ -53,7 +53,7 @@ export function createShipperNavbar() {
     const aLogout = document.createElement('a');
     aLogout.textContent = 'Logout';
     liLogout.appendChild(aLogout);
-    aLogout.onclick=logout;
+    aLogout.onclick = logout;
 
     // Append list items to ul
     ul.appendChild(liAllShipments);
@@ -81,6 +81,11 @@ export function createShipperNavbar() {
     // Append container div to navbarContainer
     const navbarContainer = document.querySelector('.navbar');
     navbarContainer.appendChild(containerDiv);
+
+    // Add event listener to navbar-toggle
+    navbarToggle.addEventListener('click', function () {
+        ul.classList.toggle('active');
+    });
 }
 
 // Call the function to create the shipper navbar

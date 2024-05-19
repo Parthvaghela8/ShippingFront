@@ -1,6 +1,14 @@
 import { logout } from './Logout.js';
 
 export function createCustomerNavbar() {
+    // Select the navbar container
+    const navbarContainer = document.querySelector('.navbar');
+
+    // Clear the container if it has any existing children
+    while (navbarContainer.firstChild) {
+        navbarContainer.removeChild(navbarContainer.firstChild);
+    }
+
     // Create container div
     const containerDiv = document.createElement('div');
     containerDiv.classList.add('container');
@@ -15,10 +23,14 @@ export function createCustomerNavbar() {
     logoImg.src = './assets/image/logo.png';
     logoImg.height = '90';
     logoImg.classList.add('logo');
-    logoImg.alt = '';
+    logoImg.alt = 'Logo';
 
     // Append logo image to navbar-logo div
     logoDiv.appendChild(logoImg);
+
+    const h1 = document.createElement('h1');
+    h1.textContent = 'Customer';
+    h1.style.color = 'aliceblue';
 
     // Create ul element
     const ul = document.createElement('ul');
@@ -27,7 +39,6 @@ export function createCustomerNavbar() {
     // Create list items
     const liLogin = document.createElement('li');
     // liLogin.onclick = checkAndSetToken;
-    
 
     const liHome = document.createElement('li');
     // liHome.onclick = createHomePage;
@@ -46,14 +57,13 @@ export function createCustomerNavbar() {
     const aAddShipments = document.createElement('a');
     aAddShipments.textContent = 'Add Shipments';
     liAddShipments.appendChild(aAddShipments);
-// debugger;
+
     const aLogin = document.createElement('a');
     aLogin.textContent = 'Logout';
     liLogin.appendChild(aLogin);
     aLogin.onclick = logout;
 
     // Append list items to ul
-    
     ul.appendChild(liHome);
     ul.appendChild(liShowShipments);
     ul.appendChild(liAddShipments);
@@ -72,13 +82,20 @@ export function createCustomerNavbar() {
 
     // Append logo, ul, and navbar-toggle to container div
     containerDiv.appendChild(logoDiv);
+    containerDiv.appendChild(h1);
     containerDiv.appendChild(ul);
     containerDiv.appendChild(navbarToggle);
 
     // Append container div to navbarContainer
-    const navbarContainer = document.querySelector('.navbar');
     navbarContainer.appendChild(containerDiv);
+
+    // Add event listener to navbar-toggle
+    navbarToggle.addEventListener('click', function () {
+        ul.classList.toggle('active');
+    });
 }
 
-// Call the function to create the navbar
-// createNavbar();
+// // Call the function to create the navbar if it does not already exist
+// if (!document.querySelector('.navbar .container')) {
+//     createCustomerNavbar();
+// }
