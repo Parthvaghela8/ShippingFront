@@ -2,7 +2,7 @@ import { openModal } from './popup.js';
 import { handleCardClick } from './shipment.js';
 
 export function submitBid(shipmentId, bidAmount) {
-    fetch('http://54.220.202.86:8080/api/bids/save', {
+    fetch(`${API_RUN}api/bids/save`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
