@@ -162,9 +162,16 @@ export function createShipmentForm() {
     submitButton.textContent = "Submit";
     submitButton.setAttribute("role", "button");
     submitButton.addEventListener("click", function (event) {
-      event.preventDefault();
-  
-      submitForm();
+      // const form = document.getElementById('shipmentForm');
+      // if (!form.checkValidity()) {
+      //     // If the form is invalid, prevent the default submit action
+          event.preventDefault();
+      //     // Trigger HTML5 form validation UI
+          // form.reportValidity();
+      // } else {
+      //     // If the form is valid, proceed with form submission
+          submitForm();
+      // }
     });
   
     fieldset.appendChild(legend);

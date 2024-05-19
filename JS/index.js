@@ -1,5 +1,6 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { handleCardClick } from './shipment.js';
+import { updateShipmentStatus } from './updateShipmentStatus.js';
 
 const container = document.getElementById('cards-container');
 const apiUrl = `${API_RUN}api/shipments/getdata`;
@@ -62,10 +63,22 @@ export function AllShipments() {
                 maxBidAmount.appendChild(maxBidAmountSpan);
                 maxBidAmount.innerHTML += shipment.shipment.maxBidAmount;
 
+
+                 // Create a timer element
+                const timerSpan = document.createElement('span');
+                timerSpan.textContent = 'Time Remaining:';
+                const timer = document.createElement('p');
+                timer.appendChild(timerSpan);
+                const timerBtn = document.createElement('span');
+                timerBtn.classList.add('timer-btn');
+                timer.appendChild(timerBtn);
+
+
                 // Append paragraphs to content div
                 content.appendChild(pickupDate);
                 content.appendChild(deliveryDate);
                 content.appendChild(maxBidAmount);
+                content.appendChild(timer);
 
                 // Append imagebox and content to anchor
                 anchor.appendChild(imagebox);
@@ -73,6 +86,39 @@ export function AllShipments() {
 
                 // Append anchor to card element
                 card.appendChild(anchor);
+
+                const bidEndTime = new Date(shipment.shipment.bidEndTime).getTime();
+
+                console.log(shipment.shipment.bidEndTime);
+
+                async function updateTimer() {
+                    const now = new Date().getTime();
+                    const distance = bidEndTime - now;
+                    // console.log(now,bidEndTime);
+
+                    const status = 'Close'
+
+                    console.log(shipment.shipment.shipmentStatus);
+
+                    if (distance < 0) {
+                        if (shipment.shipment.shipmentStatus !== status ) {
+                            await updateShipmentStatus(shipment.shipment.shipmentId,status);
+                        }
+                        timerBtn.innerHTML = "Bidding closed";
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    timerBtn.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                    setTimeout(updateTimer, 1000);
+                }
+
+                updateTimer();
 
 
                 card.addEventListener('click', () => {

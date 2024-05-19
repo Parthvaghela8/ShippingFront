@@ -1,5 +1,5 @@
 // Function to create shipment form
-import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { WEB_RUN, API_RUN } from './URLCollention.js'
 import { openModal } from './popup.js';
 
 
@@ -20,9 +20,22 @@ export function submitForm() {
         const maxBidAmount = parseFloat(
           document.getElementById("maxBidAmount").value
         ).toFixed(2);
-        const bidEndDate = new Date(
-          document.getElementById("bidEndDate").value
-        ).toISOString();
+
+        const currentDate = new Date().toISOString();
+
+        // const bidEndDate = new Date(
+        //   document.getElementById("bidEndDate").value
+        // )
+
+        // Get the selected bid end datetime value from the input field
+        const bidEndDateValue = document.getElementById("bidEndDate").value;
+        const bidEndDate = new Date(bidEndDateValue);
+        const timezoneOffset = bidEndDate.getTimezoneOffset() * 60000; // offset in milliseconds
+        const adjustedBidEndDate = new Date(bidEndDate.getTime() - timezoneOffset).toISOString();
+
+        // Use isoFormattedDateTime in your formData object
+
+
         const originPostalCodeInput =
           document.getElementById("originPostalCode");
         const destinationPostalCodeInput = document.getElementById(
@@ -51,12 +64,12 @@ export function submitForm() {
           shipmentDate: shipmentDate,
           deliveryDate: deliveryDate,
           maxBidAmount: maxBidAmount,
-          bidStartTime: "2024-02-19T09:00:00",
-          bidEndTime: "2024-02-20T17:00:00",
+          bidStartTime: currentDate,
+          bidEndTime: adjustedBidEndDate,
           imageUrl: image,
           categoryId: 1,
           description: desc,
-          shipmentStatus: "pending",
+          shipmentStatus: "open",
           customerId: localStorage.getItem('customerId'),
           originAddressId: "",
           destinationAddressId: "",

@@ -28,6 +28,7 @@ function openModal(message) {
 
 export function handleCardClick(shipmentId) {
     // Fetch data for the clicked shipment
+    
     fetch(`${API_RUN}api/shipments/${shipmentId}`)
         .then(response => {
             if (!response.ok) {
