@@ -1,5 +1,6 @@
 import { openModal } from './popup.js';
 import { handleCardClick } from './shipment.js';
+import { API_RUN , WEB_RUN } from './URLCollention.js';
 
 export function submitBid(shipmentId, bidAmount) {
     fetch(`${API_RUN}api/bids/save`, {
