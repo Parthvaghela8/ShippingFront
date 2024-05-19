@@ -49,6 +49,15 @@ export function createShipmentForm() {
     maxBidAmountInput.id = "maxBidAmount";
     maxBidAmountInput.name = "maxBidAmount";
     maxBidAmountInput.required = true;
+
+    const bidEndDateLabel = document.createElement("label");
+    bidEndDateLabel.textContent = "Bid End Date And Time:";
+    bidEndDateLabel.setAttribute("for", "bidEndDate");
+    const bidEndDateInput = document.createElement("input");
+    bidEndDateInput.type = "datetime-local"; // Use appropriate type for datetime input
+    bidEndDateInput.id = "bidEndDate";
+    bidEndDateInput.name = "bidEndDate";
+    bidEndDateInput.required = true;
   
     const h2UploadImage = document.createElement("h2");
     h2UploadImage.textContent = "Upload Image";
@@ -168,6 +177,11 @@ export function createShipmentForm() {
     fieldset.appendChild(maxBidAmountLabel);
     fieldset.appendChild(maxBidAmountInput);
     fieldset.appendChild(document.createElement("br"));
+
+    fieldset.appendChild(bidEndDateLabel);
+    fieldset.appendChild(bidEndDateInput);
+    fieldset.appendChild(document.createElement("br"));
+
     fieldset.appendChild(h2UploadImage);
     fieldset.appendChild(imageUpload);
   

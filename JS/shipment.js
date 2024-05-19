@@ -105,6 +105,10 @@ export function handleCardClick(shipmentId) {
                 const lastBid = document.createElement('p');
                 lastBid.textContent = `Last Bid: ${bids.length > 0 ? bids[bids.length - 1].bidAmount : 'No bids yet'}`;
                 bidDetailsDiv.appendChild(lastBid);
+
+                console.log(localStorage.getItem('shipperId'));
+                if(localStorage.getItem('shipperId')!==null){
+
                 const newBidHeading = document.createElement('h3');
                 newBidHeading.textContent = 'New Bid';
                 bidDetailsDiv.appendChild(newBidHeading);
@@ -117,17 +121,18 @@ export function handleCardClick(shipmentId) {
                 const bidButton = document.createElement('button');
                 bidButton.type = 'submit';
                 bidButton.textContent = 'Bid';
+                
                 const maxbid=data.shipment.maxBidAmount;
                 console.log(maxbid)
                 console.log(lastBidAmount)
                 bidButton.onclick = function () {
                     const bidAmount = parseInt(document.getElementById('bidAmount').value);
                     if (lastBidAmount === 0) {
-                        if (bidAmount > 0 && bidAmount < maxbid) {
+                        if (bidAmount < 0 && bidAmount > maxbid) {
                             submitBid(data.shipment.shipmentId, bidAmount);
                         } else {
-                            openModal("Please place a bid greater than 0.");
-                        }
+                            openModal("Please place a bid greater than 0 and less than Maxbid Amount.");
+                        }   
                     }
                     else {
                         if (bidAmount < lastBidAmount) {
@@ -152,6 +157,7 @@ export function handleCardClick(shipmentId) {
                 //     }
                 // }
                 bidDetailsDiv.appendChild(bidButton);
+            }
 
                 // Append bid details to main container
                 card.appendChild(shipmentIdDiv);

@@ -20,6 +20,9 @@ export function submitForm() {
         const maxBidAmount = parseFloat(
           document.getElementById("maxBidAmount").value
         ).toFixed(2);
+        const bidEndDate = new Date(
+          document.getElementById("bidEndDate").value
+        ).toISOString();
         const originPostalCodeInput =
           document.getElementById("originPostalCode");
         const destinationPostalCodeInput = document.getElementById(

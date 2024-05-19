@@ -14,7 +14,7 @@ export function createShipperNavbar() {
 
     // Create logo image
     const logoImg = document.createElement('img');
-    logoImg.src = '../assets/image/logo.png';
+    logoImg.src = './assets/image/logo.png';
     logoImg.height = '90';
     logoImg.classList.add('logo');
     logoImg.alt = 'Logo';

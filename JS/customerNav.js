@@ -1,6 +1,8 @@
 import { logout } from './Logout.js';
 import { createShipmentForm } from './shipmentform.js';
 import { AllShipments } from './index.js';
+import { YourShipments } from './yourShipments.js';
+
 
 
 export function createCustomerNavbar() {
@@ -55,6 +57,12 @@ export function createCustomerNavbar() {
     aShowShipments.textContent = 'Show Shipments';
     liShowShipments.appendChild(aShowShipments);
 
+    const liYourShipments = document.createElement('li');
+    liYourShipments.onclick = YourShipments;
+    const aYourShipments = document.createElement('a');
+    aYourShipments.textContent = 'Your Shipments';
+    liYourShipments.appendChild(aYourShipments);
+
     const liAddShipments = document.createElement('li');
     liAddShipments.onclick = createShipmentForm;
     const aAddShipments = document.createElement('a');
@@ -69,6 +77,7 @@ export function createCustomerNavbar() {
     // Append list items to ul
     ul.appendChild(liHome);
     ul.appendChild(liShowShipments);
+    ul.appendChild(liYourShipments);
     ul.appendChild(liAddShipments);
     ul.appendChild(liLogin);
 

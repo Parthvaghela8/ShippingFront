@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #fff;
 }
 
 .loader {
@@ -40,8 +41,8 @@ footer {
     border: #555;
     align-items: center;
     overflow: hidden;
-    border-radius: 0.3125em;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    transition: transform 1s;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .07);
 }
 
 .content{
@@ -63,9 +64,12 @@ footer {
 .shipment-card img {
     width: 100%;
     height: auto;
-    border-radius: 0.3125em;
-}
+    transition: transform 1s;
 
+}
+.shipment-card:hover img{
+    transform: scale(1.05);
+}
 .imagebox {
     width: 100%; /* Ensure image takes full width of container */
     overflow: hidden; /* Prevent image overflow */
@@ -73,7 +77,8 @@ footer {
 
 .imagebox img {
     width: 100%; /* Make sure all images fill their container */
-    height: 300px; /* Maintain aspect ratio */
+    height: 200px;
+    overflow: hidden; /* Maintain aspect ratio */
 }
 
 .shipment-card h3 {
@@ -92,7 +97,8 @@ footer {
 
 .container-card {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(21.25em, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(22.25em, 1fr));
+    gap: 2em;
 }
 
 .shipment-card-id {
