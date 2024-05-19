@@ -1,7 +1,9 @@
 // Function to create shipment form
+import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { openModal } from './popup.js';
 
 
-function submitForm() {
+export function submitForm() {
   return new Promise((resolve, reject) => {
     uploadFile()
       .then((image) => {
@@ -52,7 +54,7 @@ function submitForm() {
           categoryId: 1,
           description: desc,
           shipmentStatus: "pending",
-          customerId: 1,
+          customerId: localStorage.getItem('customerId'),
           originAddressId: "",
           destinationAddressId: "",
         };
@@ -79,7 +81,7 @@ function submitForm() {
               .then((destinationAddressId) => {
                 formData.destinationAddressId = destinationAddressId;
 
-                fetch('http://54.220.202.86:8080/api/shipments/save', {
+                fetch(`${API_RUN}api/shipments/save`, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json'
@@ -119,7 +121,7 @@ function submitForm() {
 }
 
 
-function createLabel(text, htmlFor) {
+export function createLabel(text, htmlFor) {
   const label = document.createElement("label");
   label.textContent = text;
   label.setAttribute("for", htmlFor);
@@ -127,7 +129,7 @@ function createLabel(text, htmlFor) {
 }
 
 
-function createInput(type, id, name, required) {
+export function createInput(type, id, name, required) {
   const input = document.createElement("input");
   input.type = type;
   input.id = id;
@@ -139,7 +141,7 @@ function createInput(type, id, name, required) {
 }
 
 
-function uploadFile() {
+export function uploadFile() {
   return new Promise((resolve, reject) => {
     var fileInput = document.getElementById("imageUpload");
     var file = fileInput.files[0];
@@ -153,7 +155,7 @@ function uploadFile() {
     var formData = new FormData();
     formData.append("file", file);
 
-    fetch("http://54.220.202.86:8080/api/image/upload", {
+    fetch(`${API_RUN}api/image/upload`, {
       method: "POST",
       body: formData,
     })
@@ -172,7 +174,7 @@ function uploadFile() {
       });
   });
 }
-function submitAddress(form, address, city, state, postalCode) {
+export function submitAddress(form, address, city, state, postalCode) {
   return new Promise((resolve, reject) => {
     const formData = new FormData(document.getElementById(form));
 
@@ -190,7 +192,7 @@ function submitAddress(form, address, city, state, postalCode) {
     console.log(jsonData);
 
 
-    fetch("http://54.220.202.86:8080/api/addresses/save", {
+    fetch(`${API_RUN}api/addresses/save`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

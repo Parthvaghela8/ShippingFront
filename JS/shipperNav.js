@@ -1,4 +1,6 @@
 import { logout } from "./Logout.js";
+import { createShipmentForm } from './shipmentform.js';
+import { AllShipments } from './index.js';
 
 export function createShipperNavbar() {
     // Create container div
@@ -31,7 +33,7 @@ export function createShipperNavbar() {
 
     // Create list items
     const liAllShipments = document.createElement('li');
-    // liAllShipments.onclick = loadAllShipments;
+    liAllShipments.onclick = AllShipments;
     const aAllShipments = document.createElement('a');
     aAllShipments.textContent = 'ALL shipments';
     liAllShipments.appendChild(aAllShipments);

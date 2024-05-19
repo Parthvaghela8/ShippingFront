@@ -1,4 +1,10 @@
-function createShipmentForm() {
+import { createInput } from './addshipments.js';
+import { submitForm } from './addshipments.js';
+import { createLabel } from './addshipments.js';
+
+const container = document.getElementById('cards-container');
+
+export function createShipmentForm() {
 
     container.innerHTML = "";
   

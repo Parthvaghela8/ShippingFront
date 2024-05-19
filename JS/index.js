@@ -1,8 +1,11 @@
+import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { handleCardClick } from './shipment.js';
+
 const container = document.getElementById('cards-container');
-const apiUrl = 'http://localhost:8080/api/shipments/getdata';
+const apiUrl = `${API_RUN}api/shipments/getdata`;
 
 
-function AllShipments() {
+export function AllShipments() {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
