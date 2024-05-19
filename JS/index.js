@@ -98,7 +98,7 @@ export function AllShipments() {
 
                     const status = 'Close'
 
-                    console.log(shipment.shipment.shipmentStatus);
+                    // console.log(shipment.shipment.shipmentStatus);
 
                     if (distance < 0) {
                         if (shipment.shipment.shipmentStatus !== status ) {

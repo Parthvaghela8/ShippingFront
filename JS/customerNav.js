@@ -45,28 +45,28 @@ export function createCustomerNavbar() {
     const liLogin = document.createElement('li');
     // liLogin.onclick = checkAndSetToken;
 
-    const liHome = document.createElement('li');
-    // liHome.onclick = createHomePage;
-    const aHome = document.createElement('a');
-    aHome.textContent = 'Home';
-    liHome.appendChild(aHome);
+    // const liHome = document.createElement('li');
+    // // liHome.onclick = createHomePage;
+    // const aHome = document.createElement('a');
+    // aHome.textContent = 'Home';
+    // liHome.appendChild(aHome);
 
     const liShowShipments = document.createElement('li');
     liShowShipments.onclick = AllShipments;
     const aShowShipments = document.createElement('a');
-    aShowShipments.textContent = 'Show Shipments';
+    aShowShipments.textContent = 'All Shipments';
     liShowShipments.appendChild(aShowShipments);
 
     const liYourShipments = document.createElement('li');
     liYourShipments.onclick = YourShipments;
     const aYourShipments = document.createElement('a');
-    aYourShipments.textContent = 'Your Shipments';
+    aYourShipments.textContent = 'My Shipments';
     liYourShipments.appendChild(aYourShipments);
 
     const liAddShipments = document.createElement('li');
     liAddShipments.onclick = createShipmentForm;
     const aAddShipments = document.createElement('a');
-    aAddShipments.textContent = 'Add Shipments';
+    aAddShipments.textContent = 'Add Shipment';
     liAddShipments.appendChild(aAddShipments);
 
     const aLogin = document.createElement('a');
@@ -75,7 +75,7 @@ export function createCustomerNavbar() {
     aLogin.onclick = logout;
 
     // Append list items to ul
-    ul.appendChild(liHome);
+    // ul.appendChild(liHome);
     ul.appendChild(liShowShipments);
     ul.appendChild(liYourShipments);
     ul.appendChild(liAddShipments);
