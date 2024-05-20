@@ -46,18 +46,45 @@ export function YourShipments() {
                 const content = document.createElement('div');
                 content.classList.add('content');
 
+
+                var shipmentdt = shipment.shipment.shipmentDate;
+
+                // Create a new Date object using the timestamp
+                var date = new Date(shipmentdt);
+
+                // Extract year, month, and day
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1; // Month starts from 0, so add 1
+                var day = date.getDate();
+
+                // Format the date as desired (e.g., DD-MM-YYYY)
+                var shipdt = (day < 10 ? "0" + day : day) + "-" + (month < 10 ? "0" + month : month) + "-" + year;
+
+                var deliverdt = shipment.shipment.deliveryDate;
+
+                // Create a new Date object using the timestamp
+                var date = new Date(deliverdt);
+
+                // Extract year, month, and day
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1; // Month starts from 0, so add 1
+                var day = date.getDate();
+
+                // Format the date as desired (e.g., DD-MM-YYYY)
+                var devdt = (day < 10 ? "0" + day : day) + "-" + (month < 10 ? "0" + month : month) + "-" + year;
+
                 // Create span elements for shipment details
                 const pickupDateSpan = document.createElement('span');
                 pickupDateSpan.textContent = 'PickUp Date:';
                 const pickupDate = document.createElement('p');
                 pickupDate.appendChild(pickupDateSpan);
-                pickupDate.innerHTML += shipment.shipment.shipmentDate;
+                pickupDate.innerHTML += shipdt;
 
                 const deliveryDateSpan = document.createElement('span');
                 deliveryDateSpan.textContent = 'Delivery Date:';
                 const deliveryDate = document.createElement('p');
                 deliveryDate.appendChild(deliveryDateSpan);
-                deliveryDate.innerHTML += shipment.shipment.deliveryDate;
+                deliveryDate.innerHTML += devdt;
 
                 const maxBidAmountSpan = document.createElement('span');
                 maxBidAmountSpan.textContent = 'Max Bid Amount:';

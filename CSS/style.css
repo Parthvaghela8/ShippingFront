@@ -207,6 +207,7 @@ label {
 }
 
 input[type="date"],
+input[type="text"],
 input[type="number"],
 input[type="file"],
 button[type="submit"] {
