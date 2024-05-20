@@ -1,6 +1,7 @@
 import { createInput } from './addshipments.js';
 import { submitForm } from './addshipments.js';
 import { createLabel } from './addshipments.js';
+import { openModal } from './popup.js';
 
 const container = document.getElementById('cards-container');
 
@@ -39,6 +40,25 @@ export function createShipmentForm() {
     deliveryDateInput.id = "deliveryDate";
     deliveryDateInput.name = "deliveryDate";
     deliveryDateInput.required = true;
+
+    shipmentDateInput.addEventListener("change", function() {
+      const today = new Date();
+      const shipmentDate = new Date(this.value);
+      if (shipmentDate < today) {
+          openModal("Shipment date must be greater than today");
+          this.value = ""; // Clear the input field
+      }
+  });
+  
+  deliveryDateInput.addEventListener("change", function() {
+      const shipmentDate = new Date(shipmentDateInput.value);
+      const deliveryDate = new Date(this.value);
+      const threeDaysLater = new Date(shipmentDate.getTime() + (3 * 24 * 60 * 60 * 1000)); // Adding three days in milliseconds
+      if (deliveryDate <= shipmentDate || deliveryDate < threeDaysLater) {
+          openModal("Delivery date must be at least 3 days greater than shipment date");
+          this.value = ""; // Clear the input field
+      }
+  });
   
   
     const maxBidAmountLabel = document.createElement("label");
@@ -58,6 +78,20 @@ export function createShipmentForm() {
     bidEndDateInput.id = "bidEndDate";
     bidEndDateInput.name = "bidEndDate";
     bidEndDateInput.required = true;
+  
+    bidEndDateInput.addEventListener("change", function() {
+      const today = new Date();
+      const shipmentDate = new Date(document.getElementById("shipmentDate").value);
+      const bidEndDate = new Date(this.value);
+      
+      if (bidEndDate <= today) {
+          openModal("Bid end date must be greater than today");
+          this.value = ""; // Clear the input field
+      } else if (bidEndDate >= shipmentDate) {
+          openModal("Bid end date must be less than shipment date");
+          this.value = ""; // Clear the input field
+      }
+  });
   
     const h2UploadImage = document.createElement("h2");
     h2UploadImage.textContent = "Upload Image";
