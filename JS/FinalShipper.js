@@ -1,7 +1,10 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { finalShipments } from './finalShipments.js';
+const container = document.getElementById('cards-container');
+
 
 export function getFinalShipperDetails() {
+  container.innerHTML=""
     fetch(`${API_RUN}api/finalshippers/shipments/all`)
     .then(response => {
       if (!response.ok) {

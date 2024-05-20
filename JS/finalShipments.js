@@ -1,6 +1,7 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 
 const container = document.getElementById('cards-container');
+
 export function finalShipments(shipmentId) {
     // Fetch data for the clicked shipment
 
@@ -33,14 +34,14 @@ export function finalShipments(shipmentId) {
                 const lastBidAmount = bids.length > 0 ? bids[bids.length - 1].bidAmount:0;
                 console.log(data);
                 console.log(bids);
-                container.innerHTML = "";
+                // container.innerHTML = "";
                 const card = document.createElement('div');
                 card.classList.add('shipment-card-id');
 
                 // Create heading
-                const heading = document.createElement('h1');
-                heading.textContent = 'Shipment Details';
-                container.appendChild(heading);
+                // const heading = document.createElement('h1');
+                // heading.textContent = 'Shipment Details';
+                // container.appendChild(heading);
 
                 // Create shipment ID section
                 const shipmentIdDiv = document.createElement('div');
@@ -52,6 +53,8 @@ export function finalShipments(shipmentId) {
                 const image = document.createElement('img');
                 image.src = data.shipment.imageUrl;
                 image.alt = 'Uploaded Image';
+                image.width = '460';
+                image.height = '345';
                 image.classList.add('shipment-image-id');
                 imageDiv.appendChild(image);
                 shipmentIdDiv.appendChild(imageDiv);

@@ -76,6 +76,10 @@ export function handleCardClick(shipmentId) {
                 const image = document.createElement('img');
                 image.src = data.shipment.imageUrl;
                 image.alt = 'Uploaded Image';
+                // image.alt = 'Uploaded Image';
+                image.width = '460';
+                image.height = '345';
+
                 image.classList.add('shipment-image-id');
                 imageDiv.appendChild(image);
                 shipmentIdDiv.appendChild(imageDiv);
