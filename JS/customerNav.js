@@ -33,9 +33,9 @@ export function createCustomerNavbar() {
     // Append logo image to navbar-logo div
     logoDiv.appendChild(logoImg);
 
-    const h1 = document.createElement('h1');
-    h1.textContent = 'Customer';
-    h1.style.color = 'aliceblue';
+    // const h1 = document.createElement('h1');
+    // h1.textContent = 'Customer';
+    // h1.style.color = 'aliceblue';
 
     // Create ul element
     const ul = document.createElement('ul');
@@ -45,11 +45,11 @@ export function createCustomerNavbar() {
     const liLogin = document.createElement('li');
     // liLogin.onclick = checkAndSetToken;
 
-    const liHome = document.createElement('li');
-    // liHome.onclick = createHomePage;
-    const aHome = document.createElement('a');
-    aHome.textContent = 'Home';
-    liHome.appendChild(aHome);
+    // const liHome = document.createElement('li');
+    // // liHome.onclick = createHomePage;
+    // const aHome = document.createElement('a');
+    // aHome.textContent = 'Home';
+    // liHome.appendChild(aHome);
 
     const liShowShipments = document.createElement('li');
     liShowShipments.onclick = AllShipments;
@@ -94,7 +94,7 @@ export function createCustomerNavbar() {
 
     // Append logo, ul, and navbar-toggle to container div
     containerDiv.appendChild(logoDiv);
-    containerDiv.appendChild(h1);
+    // containerDiv.appendChild(h1);
     containerDiv.appendChild(ul);
     containerDiv.appendChild(navbarToggle);
 

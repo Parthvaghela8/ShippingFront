@@ -1,6 +1,7 @@
 import { logout } from "./Logout.js";
 import { createShipmentForm } from './shipmentform.js';
 import { AllShipments } from './index.js';
+import { getFinalShipperDetails } from "./FinalShipper.js";
 
 export function createShipperNavbar() {
     // Create container div
@@ -23,9 +24,9 @@ export function createShipperNavbar() {
     logoDiv.appendChild(logoImg);
 
     // Create h1 element
-    const h1 = document.createElement('h1');
-    h1.textContent = 'Shipper';
-    h1.style.color = 'aliceblue';
+    // const h1 = document.createElement('h1');
+    // h1.textContent = 'Shipper';
+    // h1.style.color = 'aliceblue';
 
     // Create ul element
     const ul = document.createElement('ul');
@@ -45,7 +46,7 @@ export function createShipperNavbar() {
     // liAddShipments.appendChild(aAddShipments);
 
     const liYourShipments = document.createElement('li');
-    // liYourShipments.onclick = loadYourShipments;
+    liYourShipments.onclick = getFinalShipperDetails    ;
     const aYourShipments = document.createElement('a');
     aYourShipments.textContent = 'Your Shipments';
     liYourShipments.appendChild(aYourShipments);
@@ -76,7 +77,7 @@ export function createShipperNavbar() {
 
     // Append logo, h1, ul, and navbar-toggle to container div
     containerDiv.appendChild(logoDiv);
-    containerDiv.appendChild(h1);
+    // containerDiv.appendChild(h1);
     containerDiv.appendChild(ul);
     containerDiv.appendChild(navbarToggle);
 

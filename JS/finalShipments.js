@@ -1,33 +1,9 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
-import { submitBid } from './submitBid.js';
 
 const container = document.getElementById('cards-container');
-var modal = document.getElementById("myModal");
-var span = document.getElementsByClassName("close")[0];
-
-function openModal(message) {
-    var modelDiv = document.getElementById("model-inner");
-    var oldchild = document.getElementById("old-child");
-   
-    const data = document.createElement("div");
-    data.id = "old-child";
-    data.textContent = message;
-    modelDiv.replaceChild(data, oldchild);
-    modal.style.display = "block";
-  }
-
-  span.onclick = function () {
-    modal.style.display = "none";
-  };
-   
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
-
-export function handleCardClick(shipmentId) {
+export function finalShipments(shipmentId) {
     // Fetch data for the clicked shipment
+
     
     fetch(`${API_RUN}api/shipments/${shipmentId}`)
         .then(response => {
@@ -80,7 +56,8 @@ export function handleCardClick(shipmentId) {
                 imageDiv.appendChild(image);
                 shipmentIdDiv.appendChild(imageDiv);
 
-                /// Input timestamp
+                // Create shipment details container
+                // Input timestamp
                 var shipmentdt = data.shipment.shipmentDate;
 
                 // Create a new Date object using the timestamp
@@ -118,9 +95,8 @@ export function handleCardClick(shipmentId) {
                 const deliveryDate = document.createElement('p');
                 deliveryDate.innerHTML = `<span>Delivery Date:</span>${devdt}`;
                 shipmentDetailsDiv.appendChild(deliveryDate);
-
                 const maxBidAmount = document.createElement('p');
-                maxBidAmount.innerHTML = `<span>Max Bid Amount:</span>${data.shipment.maxBidAmount}`;
+                maxBidAmount.innerHTML = `<span>Your Bid:</span>${lastBidAmount}`;
                 shipmentDetailsDiv.appendChild(maxBidAmount);
                 const pickupAddress = document.createElement('p');
                 pickupAddress.innerHTML = `<span>Pickup Address:</span>${data.originAddress.streetAddress} ${data.originAddress.city} ${data.originAddress.state}`;
@@ -131,68 +107,68 @@ export function handleCardClick(shipmentId) {
                 shipmentIdDiv.appendChild(shipmentDetailsDiv);
 
                 // Create bid details section
-                const bidDetailsDiv = document.createElement('div');
-                bidDetailsDiv.classList.add('bid-details');
-                const lastBid = document.createElement('p');
-                lastBid.textContent = `Last Bid: ${bids.length > 0 ? bids[bids.length - 1].bidAmount : 'No bids yet'}`;
-                bidDetailsDiv.appendChild(lastBid);
+            //     const bidDetailsDiv = document.createElement('div');
+            //     bidDetailsDiv.classList.add('bid-details');
+            //     const lastBid = document.createElement('p');
+                // lastBid.textContent = `Last Bid: ${bids.length > 0 ? bids[bids.length - 1].bidAmount : 'No bids yet'}`;
+            //     bidDetailsDiv.appendChild(lastBid);
 
-                console.log(localStorage.getItem('shipperId'));
-                if(localStorage.getItem('shipperId')!==null){
+            //     console.log(localStorage.getItem('shipperId'));
+            //     if(localStorage.getItem('shipperId')!==null){
 
-                const newBidHeading = document.createElement('h3');
-                newBidHeading.textContent = 'New Bid';
-                bidDetailsDiv.appendChild(newBidHeading);
-                const bidInput = document.createElement('input');
-                bidInput.type = 'number';
-                bidInput.id = 'bidAmount';
-                bidInput.placeholder = 'Enter Bid Amount';
-                bidInput.min = '0';
-                bidDetailsDiv.appendChild(bidInput);
-                const bidButton = document.createElement('button');
-                bidButton.type = 'submit';
-                bidButton.textContent = 'Bid';
+            //     const newBidHeading = document.createElement('h3');
+            //     newBidHeading.textContent = 'New Bid';
+            //     bidDetailsDiv.appendChild(newBidHeading);
+            //     const bidInput = document.createElement('input');
+            //     bidInput.type = 'number';
+            //     bidInput.id = 'bidAmount';
+            //     bidInput.placeholder = 'Enter Bid Amount';
+            //     bidInput.min = '0';
+            //     bidDetailsDiv.appendChild(bidInput);
+            //     const bidButton = document.createElement('button');
+            //     bidButton.type = 'submit';
+            //     bidButton.textContent = 'Bid';
                 
-                const maxbid=data.shipment.maxBidAmount;
-                console.log(maxbid)
-                console.log(lastBidAmount)
-                bidButton.onclick = function () {
-                    const bidAmount = parseInt(document.getElementById('bidAmount').value);
-                    if (lastBidAmount === 0) {
-                        if (bidAmount > 0 && bidAmount < maxbid) {
-                            submitBid(data.shipment.shipmentId, bidAmount);
-                        } else {
-                            openModal("Please place a bid greater than 0 and less than Maxbid Amount.");
-                        }   
-                    }
-                    else {
-                        if (bidAmount < lastBidAmount) {
-                            if (bidAmount > 0) {
-                                submitBid(data.shipment.shipmentId, bidAmount);
-                            }
-                            else {
-                                alert("Please place a proper bid")
-                            }
-                        } else {
-                            console.log("hii")
-                            openModal("Bid amount must be less than the last bid amount.");
-                        }
-                    }
-                };
-                //     if (lastBidAmount==0){
-                //         bidButton.disabled=false;
-                //     }
-                //     else{
-                //     if (lastBidAmount <= 0) {
-                //         bidButton.disabled = true;
-                //     }
-                // }
-                bidDetailsDiv.appendChild(bidButton);
-            }
+            //     const maxbid=data.shipment.maxBidAmount;
+            //     console.log(maxbid)
+            //     console.log(lastBidAmount)
+            //     bidButton.onclick = function () {
+            //         const bidAmount = parseInt(document.getElementById('bidAmount').value);
+            //         if (lastBidAmount === 0) {
+            //             if (bidAmount > 0 && bidAmount < maxbid) {
+            //                 submitBid(data.shipment.shipmentId, bidAmount);
+            //             } else {
+            //                 openModal("Please place a bid greater than 0 and less than Maxbid Amount.");
+            //             }   
+            //         }
+            //         else {
+            //             if (bidAmount < lastBidAmount) {
+            //                 if (bidAmount > 0) {
+            //                     submitBid(data.shipment.shipmentId, bidAmount);
+            //                 }
+            //                 else {
+            //                     alert("Please place a proper bid")
+            //                 }
+            //             } else {
+            //                 console.log("hii")
+            //                 openModal("Bid amount must be less than the last bid amount.");
+            //             }
+            //         }
+            //     };
+            //     //     if (lastBidAmount==0){
+            //     //         bidButton.disabled=false;
+            //     //     }
+            //     //     else{
+            //     //     if (lastBidAmount <= 0) {
+            //     //         bidButton.disabled = true;
+            //     //     }
+            //     // }
+            //     bidDetailsDiv.appendChild(bidButton);
+            // }
 
                 // Append bid details to main container
                 card.appendChild(shipmentIdDiv);
-                card.appendChild(bidDetailsDiv);
+                // card.appendChild(bidDetailsDiv);
 
                 // Append main container to the body or any desired parent element
 
