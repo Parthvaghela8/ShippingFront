@@ -216,7 +216,10 @@ if(localStorage.getItem('userEmail')=== null)
 
     container.appendChild(paragraph1);
     container.appendChild(heading);
+    if(localStorage.getItem('userEmail')=== null)
+      {
     container.appendChild(paragraph2);
+      }
     container.appendChild(buttonsDiv);
     container.appendChild(modalDiv);
 
