@@ -1,6 +1,8 @@
 import { API_RUN, WEB_RUN } from './URLCollention.js'
+import { closeLoader, openLoader } from './home.js';
 
 async function getTokenFromCode(code) {
+    openLoader()
     const url = `${API_RUN}auth/code?code=${code}&flag=${localStorage.getItem('flag')}`;
     localStorage.setItem("gettokenurl",url);
     let Token = await fetch(url)
@@ -8,6 +10,7 @@ async function getTokenFromCode(code) {
         .catch((error) => {
             console.error("Error fetching neighbourhood data:", error);
         });
+    closeLoader()
     return Token;
 }
 
@@ -63,6 +66,7 @@ export function GitLogin(flag) {
 export async function GitFech() {
 
     let useremail;
+    openLoader();
 
     fetch(`https://api.github.com/user/emails`, {
         method: "GET",
@@ -100,50 +104,6 @@ export async function GitFech() {
         .catch((error) => {
             console.error("Error fetching emails:", error);
         });
+        closeLoader()
     }
 
-    // let saved = false;
-    // if (localStorage.getItem("username")) {
-    //     const Employees = await GetAllEmployee();
-    //     Employees.map((emp) => {
-    //         if (localStorage.getItem("username") === emp.employeeName) {
-    //             saved = true;
-    //         }
-    //     });
-    // }
-    // if (!saved) {
-    //     const requestBody = {
-    //         method: "POST",
-    //         headers: {
-    //             Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //             employeeName: localStorage.getItem("username"),
-    //             employeeReportsTo: 0,
-    //         }),
-    //     };
-
-    // // Send the POST request
-    // fetch(`${APIURL}employees`, requestBody)
-    //     .then((response) => {
-    //         if (!response.ok) {
-    //             // openModal("Failed to add use");
-    //             throw new Error("Failed to add user");
-    //         }
-    //         return response.json();
-    //     })
-    //     .then((data) => {
-    //         // openModal("User Added successfully:");
-    //         loadEventsPage();
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error creating employee", error);
-    //     });
-    // }
-// }
-
-
-
-// Call the function
-// checkAndSetToken();

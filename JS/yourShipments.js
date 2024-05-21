@@ -1,5 +1,6 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { handleCardClick } from './shipment.js';
+import { openLoader,closeLoader } from './home.js';
 
 const container = document.getElementById('cards-container');
 const apiUrl = `${API_RUN}api/shipments/getdata`;
@@ -9,6 +10,7 @@ export function YourShipments() {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
+            openLoader();
             console.log(data)
             container.innerHTML = ""
             const cardContainer = document.createElement('div'); // Create a parent div for all cards
@@ -117,6 +119,7 @@ export function YourShipments() {
             container.appendChild(cardContainer);
         })
         .catch(error => console.error('Error fetching data:', error));
+        closeLoader()
 }
 
 // AllShipments()

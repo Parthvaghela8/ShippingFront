@@ -1,9 +1,12 @@
 // Function to create shipment form
 import { WEB_RUN, API_RUN } from './URLCollention.js'
 import { openModal } from './popup.js';
+import { AllShipments } from './index.js';
+import { openLoader , closeLoader } from './home.js';
 
 
 export function submitForm() {
+  openLoader()
   return new Promise((resolve, reject) => {
     uploadFile()
       .then((image) => {
@@ -105,8 +108,10 @@ export function submitForm() {
                   body: JSON.stringify(formData)
                 })
                   .then(response => {
+                    closeLoader()
                     if (response.ok) {
                       openModal('Shipment created successfully!');
+                      AllShipments();
                       resolve();
                     } else {
                       throw new Error('Error creating shipment');

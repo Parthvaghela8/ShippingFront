@@ -8,6 +8,7 @@ import { createShipperNavbar } from './shipperNav.js';
 
 async function addUserAndFetchDetails(email) {
     try {
+      openLoader();
       // Attempt to add user and get the userId
       const userId = await addUser(email);
       
@@ -22,7 +23,7 @@ async function addUserAndFetchDetails(email) {
      
       const customerData = await addCustomer(userId);
 
-      
+      closeLoader()
       return customerData;
     } catch (error) {
       console.error('Error:', error);
@@ -33,6 +34,7 @@ async function addUserAndFetchDetails(email) {
 
   async function addShipperAndFetchDetails(email) {
     try {
+      openLoader();
       // Attempt to add user and get the userId
       const userId = await addUser(email);
       
@@ -57,13 +59,23 @@ async function addUserAndFetchDetails(email) {
           console.error('Error:', error);
       });
 
-      
+      closeLoader()
       return shipperData;
     } catch (error) {
       console.error('Error:', error);
       throw error;
     }
 }
+
+export function openLoader() {
+  document.getElementById("loader").style.display = "block";
+}
+
+// Function to close the loader
+export function closeLoader() {
+  document.getElementById("loader").style.display = "none";
+}
+
 
   
   
