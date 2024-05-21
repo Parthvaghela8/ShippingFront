@@ -7,10 +7,11 @@ const apiUrl = `${API_RUN}api/shipments/getdata`;
 
 
 export function YourShipments() {
+    openLoader()
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            openLoader();
+            closeLoader()
             console.log(data)
             container.innerHTML = ""
             const cardContainer = document.createElement('div'); // Create a parent div for all cards

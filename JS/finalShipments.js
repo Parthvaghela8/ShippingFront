@@ -1,11 +1,12 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { closeLoader, openLoader } from './home.js';
 
 const container = document.getElementById('cards-container');
 
 export function finalShipments(shipmentId) {
     // Fetch data for the clicked shipment
 
-    
+    openLoader()
     fetch(`${API_RUN}api/shipments/${shipmentId}`)
         .then(response => {
             if (!response.ok) {
@@ -27,6 +28,7 @@ export function finalShipments(shipmentId) {
                 return response.json();
             })
             .then(bids => {
+                closeLoader()
 
                 // fetch(`${API_RUN}api/bids/save`)
                 // const lastBidAmount=bids.length > 0 ? bids[bids.length - 1].bidAmount: 0
