@@ -1,11 +1,13 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { finalShipments } from './finalShipments.js';
+import { closeLoader, openLoader } from './home.js';
 const container = document.getElementById('cards-container');
 
 
 export function getFinalShipperDetails() {
   // debugger;
   container.innerHTML=""
+  openLoader()
     fetch(`${API_RUN}api/finalshippers/shipments/all`)
     .then(response => {
       if (!response.ok) {
@@ -14,6 +16,7 @@ export function getFinalShipperDetails() {
       return response.json();
     })
     .then(shipments => {
+      closeLoader()
       shipments.map(shipment => {
       // Handle the list of shipments
       console.log(shipment.shipperId);

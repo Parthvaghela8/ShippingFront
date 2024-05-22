@@ -8,6 +8,7 @@ const apiUrl = `${API_RUN}api/shipments/getdata`;
 
 
 export function YourShipments() {
+    openLoader()
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
