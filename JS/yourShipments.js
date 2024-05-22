@@ -2,6 +2,7 @@ import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { handleCardClick } from './shipment.js';
 import { deleteShipment } from './deleteShipment.js';
 import { deleteBids } from './deleteBids.js';
+import { closeLoader, openLoader } from './home.js';
 
 const container = document.getElementById('cards-container');
 const apiUrl = `${API_RUN}api/shipments/getdata`;
@@ -9,10 +10,12 @@ const apiUrl = `${API_RUN}api/shipments/getdata`;
 
 export function YourShipments() {
     openLoader()
+    container.innerHTML = ""
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            container.innerHTML = ""
+           
+            
             const cardContainer = document.createElement('div'); // Create a parent div for all cards
             cardContainer.classList.add('container-card'); // Add a class to the parent div
             const Heading = document.createElement('h1'); // Create a parent div for all cards
@@ -129,6 +132,7 @@ export function YourShipments() {
                 // });
                 // Append the card to the parent div
                 cardContainer.appendChild(card);
+                closeLoader()
             }
         });
             container.appendChild(Heading);

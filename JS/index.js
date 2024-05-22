@@ -1,4 +1,5 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { closeLoader, openLoader } from './home.js';
 import { handleCardClick } from './shipment.js';
 import { updateShipmentStatus } from './updateShipmentStatus.js';
 
@@ -7,18 +8,20 @@ const apiUrl = `${API_RUN}api/shipments/getdata`;
 
 
 export function AllShipments() {
+    openLoader()
+    container.innerHTML = ""
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            container.innerHTML = ""
+            
             const cardContainer = document.createElement('div'); // Create a parent div for all cards
             cardContainer.classList.add('container-card'); // Add a class to the parent div
             const Heading = document.createElement('h1'); // Create a parent div for all cards
             Heading.classList.add('heading');
             Heading.innerHTML = `Shipments`
             data.map(shipment => {
-                // if(shipment.shipment.shipmentStatus !==  )
+                if(shipment.shipment.shipmentStatus !== 'Close' ){
                 const card = document.createElement('div');
                 card.classList.add('shipment-card');
                 // Assuming 'shipment' is available in the current context
@@ -153,7 +156,9 @@ export function AllShipments() {
                     handleCardClick(shipment.shipment.shipmentId);
                 });
                 // Append the card to the parent div
+                closeLoader()
                 cardContainer.appendChild(card);
+            }
             });
             container.appendChild(Heading);
             // Append the parent div to the container
