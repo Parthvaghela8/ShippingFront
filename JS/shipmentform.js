@@ -192,10 +192,11 @@ export function createShipmentForm() {
     descriptionInput.id = "description";
     descriptionInput.name = "description";
     descriptionInput.rows = "4";
-    descriptionInput.cols = "75";
+    descriptionInput.cols = "80";
   
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
+    submitButton.classList.add('shipment-form-button');
     submitButton.textContent = "Submit";
     submitButton.setAttribute("role", "button");
     submitButton.addEventListener("click", function (event) {

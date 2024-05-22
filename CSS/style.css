@@ -213,8 +213,7 @@ label {
 input[type="date"],
 input[type="text"],
 input[type="number"],
-input[type="file"],
-button[type="submit"] {
+input[type="file"] {
     width: 100%;
     padding: 0.625em;
     margin-bottom: 0.625em;
@@ -222,15 +221,7 @@ button[type="submit"] {
     border-radius: 0.3125em;
 }
 
-button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-}
 
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
 
 form textarea {
     width: 100%;
@@ -297,18 +288,48 @@ button[type="submit"] {
     border-radius: 0.3125em;
 }
 
-/* Additional styles for the submit button */
-button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
+
+
+/* CSS */
+.shipment-form-button {
+  appearance: none;
+  background-color: #ff3e41;
+  border: 2px solid #13aa52;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-width: 0;
+  outline: none;
+  padding: 10px 14px !important;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  /* width: 100%; */
+  will-change: transform;
 }
 
-button[type="submit"]:hover {
-    background-color: #0056b3;
+.shipment-form-button:disabled {
+  pointer-events: none;
 }
 
-/* Specific styles for the datetime-local input */
-input[type="datetime-local"] {
-    /* Add any specific styles if needed */
+.shipment-form-button:hover {
+  color: #fff;
+  background-color: #ff3e41;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.shipment-form-button:active {
+  box-shadow: none;
+  transform: translateY(0);
 }
