@@ -6,7 +6,7 @@ import { openLoader , closeLoader } from './home.js';
 
 
 export function submitForm() {
-  openLoader()
+  // openLoader()
   return new Promise((resolve, reject) => {
     uploadFile()
       .then((image) => {
@@ -108,7 +108,7 @@ export function submitForm() {
                   body: JSON.stringify(formData)
                 })
                   .then(response => {
-                    closeLoader()
+                    // closeLoader()
                     if (response.ok) {
                       openModal('Shipment created successfully!');
                       AllShipments();

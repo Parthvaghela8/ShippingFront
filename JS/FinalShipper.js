@@ -4,6 +4,7 @@ const container = document.getElementById('cards-container');
 
 
 export function getFinalShipperDetails() {
+  // debugger;
   container.innerHTML=""
     fetch(`${API_RUN}api/finalshippers/shipments/all`)
     .then(response => {

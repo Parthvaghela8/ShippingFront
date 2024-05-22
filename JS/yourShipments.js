@@ -1,6 +1,7 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { handleCardClick } from './shipment.js';
-import { openLoader,closeLoader } from './home.js';
+import { deleteShipment } from './deleteShipment.js';
+import { deleteBids } from './deleteBids.js';
 
 const container = document.getElementById('cards-container');
 const apiUrl = `${API_RUN}api/shipments/getdata`;
@@ -10,8 +11,6 @@ export function YourShipments() {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            openLoader();
-            console.log(data)
             container.innerHTML = ""
             const cardContainer = document.createElement('div'); // Create a parent div for all cards
             cardContainer.classList.add('container-card'); // Add a class to the parent div
@@ -22,6 +21,7 @@ export function YourShipments() {
                 console.log(shipment.customer.customerId);
                 // debugger;
                 if(shipment.customer.customerId == localStorage.getItem('customerId')){
+                    console.log(shipment.shipment.shipmentId,'dvs');
                 const card = document.createElement('div');
                 card.classList.add('shipment-card');
                 // Assuming 'shipment' is available in the current context
@@ -93,11 +93,27 @@ export function YourShipments() {
                 const maxBidAmount = document.createElement('p');
                 maxBidAmount.appendChild(maxBidAmountSpan);
                 maxBidAmount.innerHTML += shipment.shipment.maxBidAmount;
-
-                // Append paragraphs to content div
                 content.appendChild(pickupDate);
                 content.appendChild(deliveryDate);
                 content.appendChild(maxBidAmount);
+
+                if(shipment.shipment.shipmentStatus !== 'Close'){;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "submit";
+                deleteButton.textContent = "Delete";
+                deleteButton.setAttribute("role", "button");
+                
+                deleteButton.onclick = ()=>{
+                    deleteBids(shipment.shipment.shipmentId)
+                };
+                content.appendChild(deleteButton)
+            }
+            else{
+                const BidClosed = document.createElement('span');
+                BidClosed.textContent = 'Bid Closed';
+                content.appendChild(BidClosed)
+            }
 
                 // Append imagebox and content to anchor
                 anchor.appendChild(imagebox);
@@ -107,9 +123,9 @@ export function YourShipments() {
                 card.appendChild(anchor);
 
 
-                card.addEventListener('click', () => {
-                    handleCardClick(shipment.shipment.shipmentId);
-                });
+                // card.addEventListener('click', () => {
+                //     handleCardClick(shipment.shipment.shipmentId);
+                // });
                 // Append the card to the parent div
                 cardContainer.appendChild(card);
             }
@@ -119,7 +135,6 @@ export function YourShipments() {
             container.appendChild(cardContainer);
         })
         .catch(error => console.error('Error fetching data:', error));
-        closeLoader()
 }
 
 // AllShipments()

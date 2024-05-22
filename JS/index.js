@@ -18,6 +18,7 @@ export function AllShipments() {
             Heading.classList.add('heading');
             Heading.innerHTML = `Shipments`
             data.map(shipment => {
+                // if(shipment.shipment.shipmentStatus !==  )
                 const card = document.createElement('div');
                 card.classList.add('shipment-card');
                 // Assuming 'shipment' is available in the current context
