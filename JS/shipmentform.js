@@ -18,8 +18,9 @@ export function createShipmentForm() {
     const fieldset = document.createElement("fieldset");
   
     // Create legend element for fieldset
-    const legend = document.createElement("legend");
-    legend.textContent = "Shipment Details";
+    const heading1 = document.createElement("h2");
+    heading1.textContent = "Shipment Details";
+    heading1.classList.add('shipment-heading');
   
   
     const shipmentDateLabel = document.createElement("label");
@@ -92,9 +93,11 @@ export function createShipmentForm() {
           this.value = ""; // Clear the input field
       }
   });
-  
-    const h2UploadImage = document.createElement("h2");
-    h2UploadImage.textContent = "Upload Image";
+  const h2UploadImage = createLabel(
+    "Upload image",
+  );
+    // const h2UploadImage = document.createElement("lable");
+    // h2UploadImage.textContent = "Upload Image";
   
     const imageUpload = document.createElement("input");
     imageUpload.type = "file";
@@ -104,7 +107,7 @@ export function createShipmentForm() {
     OriginAddressForm.id = "OriginAddressForm";
     OriginAddressForm.setAttribute("role", "form");
   
-    const originAddressLegend = document.createElement("legend");
+    const originAddressLegend = document.createElement("h4");
     originAddressLegend.textContent = "Origin Address Details";
   
     const originStreetAddressLabel = createLabel(
@@ -141,7 +144,7 @@ export function createShipmentForm() {
     DestinationAddressForm.id = "DestinationAddressForm";
     DestinationAddressForm.setAttribute("role", "form");
   
-    const destinationAddressLegend = document.createElement("legend");
+    const destinationAddressLegend = document.createElement("h4");
     destinationAddressLegend.textContent = "Destination Address Details";
   
     const destinationStreetAddressLabel = createLabel(
@@ -210,7 +213,7 @@ export function createShipmentForm() {
       }
     });
   
-    fieldset.appendChild(legend);
+    fieldset.appendChild(heading1);
     fieldset.appendChild(shipmentDateLabel);
     fieldset.appendChild(shipmentDateInput);
     fieldset.appendChild(document.createElement("br"));
