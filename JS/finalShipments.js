@@ -178,6 +178,7 @@ export function finalShipments(shipmentId) {
                 // Append main container to the body or any desired parent element
 
                 container.appendChild(card);
+                closeLoader()
             })
             .catch(error => console.error('Error fetching bids:', error));
     })
