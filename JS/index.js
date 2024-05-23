@@ -268,7 +268,7 @@ function filterShipments(filterBy, filterValue) {
             const deliveryDate = new Date(shipment.shipment.deliveryDate).toISOString().slice(0, 16);
             return deliveryDate >= filterDate; // Filter shipments with dates greater than or equal to filterDate
         } else if (filterBy === "maxBidAmount") {
-            return shipment.shipment.maxBidAmount >= parseInt(filterValue); // Filter shipments with max bid amount greater than or equal to filterValue
+            return shipment.shipment.maxBidAmount <= parseInt(filterValue); // Filter shipments with max bid amount greater than or equal to filterValue
         }
     });
 
