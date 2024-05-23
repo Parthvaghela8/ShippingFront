@@ -138,12 +138,16 @@ export function YourShipments() {
                 cardContainer.appendChild(card);
                 closeLoader()
             }
+           
         });
             container.appendChild(Heading);
             // Append the parent div to the container
             container.appendChild(cardContainer);
+            closeLoader()
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => {console.error('Error fetching data:', error)
+            closeLoader()
+        });
 }
 
 // AllShipments()
