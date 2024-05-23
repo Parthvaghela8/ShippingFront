@@ -279,6 +279,8 @@ function filterShipments(filterBy, filterValue) {
 function renderFilteredData(filteredData) {
   // Clear existing data
   container.innerHTML = "";
+  const cardContainer = document.createElement("div"); // Create a parent div for all cards
+  cardContainer.classList.add("container-card");
   // Render filtered data
   filteredData.forEach((shipment) => {
     const card = document.createElement("div");
@@ -349,7 +351,8 @@ function renderFilteredData(filteredData) {
     card.appendChild(anchor);
 
     // Append the card to the parent div
-    container.appendChild(card);
+    cardContainer.appendChild(card);
+    container.append(cardContainer);
   });
 }
 
