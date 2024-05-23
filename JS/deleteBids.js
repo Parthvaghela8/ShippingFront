@@ -3,7 +3,7 @@ import { openModal } from "./popup.js";
 import { deleteShipment } from "./deleteShipment.js";
 
 export async function deleteBids(shipmentId){
-    debugger;
+    // debugger;
    await fetch(`${API_RUN}api/bids/shipment/${shipmentId}`, {
     method: 'DELETE',
     headers: {
