@@ -333,3 +333,63 @@ button[type="submit"] {
   box-shadow: none;
   transform: translateY(0);
 }
+
+
+
+.form-container {
+    flex: 1 1 60%;
+    padding: 10px;
+}
+
+/* Styles for form elements */
+#shipmentForm fieldset {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+#shipmentForm label {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#shipmentForm input[type="text"],
+#shipmentForm input[type="date"],
+#shipmentForm input[type="number"],
+#shipmentForm input[type="datetime-local"],
+#shipmentForm textarea {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#shipmentForm textarea {
+    resize: vertical;
+}
+
+.shipment-form-button {
+    display: inline-block;
+    background-color: #FF3E41;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.shipment-form-button:hover {
+    background-color: #ff6567;
+}
+
+.shipment-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
