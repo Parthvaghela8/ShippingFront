@@ -4,8 +4,10 @@ import { createHomePage, startCall } from "./home.js";
 export function logout() {
           
     localStorage.clear();
-    const filterInputContainer = document.getElementById("filter-container");
-    filterInputContainer.innerHTML=''
+    const filterContainer = document.getElementById("filter-container");
+    filterContainer.innerHTML=''
+    const filterInputContainer = document.getElementById("filter-input-container");
+    filterInputContainer.innerHTML
     // Clear session storage
     sessionStorage.clear();
 
