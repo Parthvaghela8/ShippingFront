@@ -8,6 +8,10 @@ const container = document.getElementById('cards-container');
 export function createShipmentForm() {
 
     container.innerHTML = "";
+    const filterContainer = document.getElementById("filter-container");
+    filterContainer.innerHTML=''
+    const filterInputContainer = document.getElementById("filter-input-container");
+    filterInputContainer.innerHTML=''
   
     // Create form element
     const form = document.createElement("form");
