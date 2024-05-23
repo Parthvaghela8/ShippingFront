@@ -138,6 +138,7 @@ export function handleCardClick(shipmentId) {
                     const bidDetailsDiv = document.createElement('div');
                     bidDetailsDiv.classList.add('bid-details');
                     const lastBid = document.createElement('p');
+                    lastBid.classList.add('last-bid');
                     lastBid.textContent = `Last Bid: ${bids.length > 0 ? bids[bids.length - 1].bidAmount : 'No bids yet'}`;
                     bidDetailsDiv.appendChild(lastBid);
 
