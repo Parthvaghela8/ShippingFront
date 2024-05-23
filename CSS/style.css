@@ -240,6 +240,10 @@ footer {
         max-width: 100%;
         height: auto; /* Limit image width on larger screens */
     }
+    .container-card-final{
+        max-width: 100%
+    }
+    
     .shipment-id{
         flex-direction: column;
     }
