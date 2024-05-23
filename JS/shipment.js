@@ -113,7 +113,7 @@ export function handleCardClick(shipmentId) {
 
                     // Output the simple date
                     // console.log(simpleDate);
-
+                    const maxbid = data.shipment.maxBidAmount;
                     const shipmentDetailsDiv = document.createElement('div');
                     shipmentDetailsDiv.classList.add('shipment-details');
                     const pickupDate = document.createElement('p');
