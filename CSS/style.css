@@ -492,7 +492,7 @@ button[type="submit"] {
     border-radius: 5px;
 }
 
-button {
+.filter-button {
     padding: 8px 20px;
     background-color: #4CAF50;
     color: white;
@@ -501,6 +501,6 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.filter-button:hover {
     background-color: #45a049;
 }

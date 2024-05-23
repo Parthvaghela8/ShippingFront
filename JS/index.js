@@ -55,6 +55,7 @@ filterSelect.addEventListener("change", function () {
 
       const applyFilterBtn = document.createElement("button");
       applyFilterBtn.textContent = "Apply Filter";
+      applyFilterBtn.classList='filter-button';
     //   debugger
       applyFilterBtn.addEventListener("click", function () {
         const filterInput=document.getElementById("filter-input")
