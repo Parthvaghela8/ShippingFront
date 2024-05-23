@@ -1,12 +1,11 @@
-import { WEB_RUN , API_RUN } from './URLCollention.js'
+import { API_RUN } from './URLCollention.js';
 import { closeLoader, openLoader } from './home.js';
 
 const container = document.getElementById('cards-container');
 
 export function finalShipments(shipmentId) {
     // Fetch data for the clicked shipment
-
-    openLoader()
+    openLoader();
     fetch(`${API_RUN}api/shipments/${shipmentId}`)
         .then(response => {
             if (!response.ok) {
@@ -17,170 +16,93 @@ export function finalShipments(shipmentId) {
         .then(data => {
             // Fetch last bid for the shipment
             fetch(`${API_RUN}api/bids/shipment/${shipmentId}`)
-            .then(response => {
-                if (!response.ok) {
-                    if (response.status === 404) {
-                        // Handle case where no bids are posted
-                        return [];
+                .then(response => {
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            // Handle case where no bids are posted
+                            return [];
+                        }
+                        throw new Error('Network response was not ok');
                     }
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(bids => {
-                closeLoader()
+                    return response.json();
+                })
+                .then(bids => {
+                    closeLoader();
+                    // Display shipment details and last bid
+                    const lastBidAmount = bids.length > 0 ? bids[bids.length - 1].bidAmount : 0;
+                    console.log(data);
+                    console.log(bids);
 
-                // fetch(`${API_RUN}api/bids/save`)
-                // const lastBidAmount=bids.length > 0 ? bids[bids.length - 1].bidAmount: 0
-                // Display shipment details and last bid
-                const lastBidAmount = bids.length > 0 ? bids[bids.length - 1].bidAmount:0;
-                console.log(data);
-                console.log(bids);
-                // container.innerHTML = "";
-                const card = document.createElement('div');
-                card.classList.add('shipment-card-id');
+                    const cardContainer = document.createElement('div');
+                    cardContainer.classList.add('container-card-final');
 
-                // Create heading
-                // const heading = document.createElement('h1');
-                // heading.textContent = 'Shipment Details';
-                // container.appendChild(heading);
+                    const card = document.createElement('div');
+                    card.classList.add('shipment-card-final');
 
-                // Create shipment ID section
-                const shipmentIdDiv = document.createElement('div');
-                shipmentIdDiv.classList.add('shipment-id');
+                    const shipmentIdDiv = document.createElement('div');
+                    shipmentIdDiv.classList.add('shipment');
 
-                // Create image container
-                const imageDiv = document.createElement('div');
-                imageDiv.classList.add('imageid');
-                const image = document.createElement('img');
-                image.src = data.shipment.imageUrl;
-                image.alt = 'Uploaded Image';
-                image.width = '460';
-                image.height = '345';
-                image.classList.add('shipment-image-id');
-                imageDiv.appendChild(image);
-                shipmentIdDiv.appendChild(imageDiv);
+                    // Create image container
+                    const imageDiv = document.createElement('div');
+                    imageDiv.classList.add('imageid');
+                    const image = document.createElement('img');
+                    image.src = data.shipment.imageUrl;
+                    image.alt = 'Uploaded Image';
+                    image.width = '460';
+                    image.height = '345';
+                    image.classList.add('shipment-image-id');
+                    imageDiv.appendChild(image);
+                    shipmentIdDiv.appendChild(imageDiv);
 
-                // Create shipment details container
-                // Input timestamp
-                var shipmentdt = data.shipment.shipmentDate;
+                    // Create shipment details container
+                    const shipmentDetailsDiv = document.createElement('div');
+                    shipmentDetailsDiv.classList.add('shipment-details');
+                    const pickupDate = document.createElement('p');
+                    pickupDate.innerHTML = `<span>PickUp Date:</span>${formatDate(data.shipment.shipmentDate)}`;
+                    shipmentDetailsDiv.appendChild(pickupDate);
+                    const deliveryDate = document.createElement('p');
+                    deliveryDate.innerHTML = `<span>Delivery Date:</span>${formatDate(data.shipment.deliveryDate)}`;
+                    shipmentDetailsDiv.appendChild(deliveryDate);
+                    const maxBidAmount = document.createElement('p');
+                    maxBidAmount.innerHTML = `<span>Your Bid:</span>${lastBidAmount}`;
+                    shipmentDetailsDiv.appendChild(maxBidAmount);
+                    const pickupAddress = document.createElement('p');
+                    pickupAddress.innerHTML = `<span>Pickup Address:</span>${formatAddress(data.originAddress)}`;
+                    shipmentDetailsDiv.appendChild(pickupAddress);
+                    const deliveryAddress = document.createElement('p');
+                    deliveryAddress.innerHTML = `<span>Delivery Address:</span>${formatAddress(data.destinationAddress)}`;
+                    shipmentDetailsDiv.appendChild(deliveryAddress);
+                    shipmentIdDiv.appendChild(shipmentDetailsDiv);
 
-                // Create a new Date object using the timestamp
-                var date = new Date(shipmentdt);
+                    // Append shipment details to card
+                    card.appendChild(shipmentIdDiv);
 
-                // Extract year, month, and day
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1; // Month starts from 0, so add 1
-                var day = date.getDate();
+                    // Append card to card container
+                    cardContainer.appendChild(card);
 
-                // Format the date as desired (e.g., DD-MM-YYYY)
-                var shipdt = (day < 10 ? "0" + day : day) + "-" + (month < 10 ? "0" + month : month) + "-" + year;
+                    // Append card container to main container
+                    container.appendChild(cardContainer);
+                })
+                .catch(error => console.error('Error fetching bids:', error));
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
 
-                var deliverdt = data.shipment.deliveryDate;
+// Sample array of shipmentIds
+const shipmentIds = ['shipmentId1', 'shipmentId2', 'shipmentId3'];
 
-                // Create a new Date object using the timestamp
-                var date = new Date(deliverdt);
+// Iterate over shipmentIds and call finalShipments function for each
+shipmentIds.forEach(shipmentId => finalShipments(shipmentId));
 
-                // Extract year, month, and day
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1; // Month starts from 0, so add 1
-                var day = date.getDate();
+// Utility functions formatDate and formatAddress remain the same
+function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${day}-${month}-${year}`;
+}
 
-                // Format the date as desired (e.g., DD-MM-YYYY)
-                var devdt = (day < 10 ? "0" + day : day) + "-" + (month < 10 ? "0" + month : month) + "-" + year;
-
-                // Output the simple date
-                // console.log(simpleDate);
-
-                const shipmentDetailsDiv = document.createElement('div');
-                shipmentDetailsDiv.classList.add('shipment-details');
-                const pickupDate = document.createElement('p');
-                pickupDate.innerHTML = `<span>PickUp Date:</span>${shipdt}`;
-                shipmentDetailsDiv.appendChild(pickupDate);
-                const deliveryDate = document.createElement('p');
-                deliveryDate.innerHTML = `<span>Delivery Date:</span>${devdt}`;
-                shipmentDetailsDiv.appendChild(deliveryDate);
-                const maxBidAmount = document.createElement('p');
-                maxBidAmount.innerHTML = `<span>Your Bid:</span>${lastBidAmount}`;
-                shipmentDetailsDiv.appendChild(maxBidAmount);
-                const pickupAddress = document.createElement('p');
-                pickupAddress.innerHTML = `<span>Pickup Address:</span>${data.originAddress.streetAddress} ${data.originAddress.city} ${data.originAddress.state}`;
-                shipmentDetailsDiv.appendChild(pickupAddress);
-                const deliveryAddress = document.createElement('p');
-                deliveryAddress.innerHTML = `<span>Delivery Address:</span>${data.destinationAddress.streetAddress} ${data.destinationAddress.city} ${data.destinationAddress.state}`;
-                shipmentDetailsDiv.appendChild(deliveryAddress);
-                shipmentIdDiv.appendChild(shipmentDetailsDiv);
-
-                // Create bid details section
-            //     const bidDetailsDiv = document.createElement('div');
-            //     bidDetailsDiv.classList.add('bid-details');
-            //     const lastBid = document.createElement('p');
-                // lastBid.textContent = `Last Bid: ${bids.length > 0 ? bids[bids.length - 1].bidAmount : 'No bids yet'}`;
-            //     bidDetailsDiv.appendChild(lastBid);
-
-            //     console.log(localStorage.getItem('shipperId'));
-            //     if(localStorage.getItem('shipperId')!==null){
-
-            //     const newBidHeading = document.createElement('h3');
-            //     newBidHeading.textContent = 'New Bid';
-            //     bidDetailsDiv.appendChild(newBidHeading);
-            //     const bidInput = document.createElement('input');
-            //     bidInput.type = 'number';
-            //     bidInput.id = 'bidAmount';
-            //     bidInput.placeholder = 'Enter Bid Amount';
-            //     bidInput.min = '0';
-            //     bidDetailsDiv.appendChild(bidInput);
-            //     const bidButton = document.createElement('button');
-            //     bidButton.type = 'submit';
-            //     bidButton.textContent = 'Bid';
-                
-            //     const maxbid=data.shipment.maxBidAmount;
-            //     console.log(maxbid)
-            //     console.log(lastBidAmount)
-            //     bidButton.onclick = function () {
-            //         const bidAmount = parseInt(document.getElementById('bidAmount').value);
-            //         if (lastBidAmount === 0) {
-            //             if (bidAmount > 0 && bidAmount < maxbid) {
-            //                 submitBid(data.shipment.shipmentId, bidAmount);
-            //             } else {
-            //                 openModal("Please place a bid greater than 0 and less than Maxbid Amount.");
-            //             }   
-            //         }
-            //         else {
-            //             if (bidAmount < lastBidAmount) {
-            //                 if (bidAmount > 0) {
-            //                     submitBid(data.shipment.shipmentId, bidAmount);
-            //                 }
-            //                 else {
-            //                     alert("Please place a proper bid")
-            //                 }
-            //             } else {
-            //                 console.log("hii")
-            //                 openModal("Bid amount must be less than the last bid amount.");
-            //             }
-            //         }
-            //     };
-            //     //     if (lastBidAmount==0){
-            //     //         bidButton.disabled=false;
-            //     //     }
-            //     //     else{
-            //     //     if (lastBidAmount <= 0) {
-            //     //         bidButton.disabled = true;
-            //     //     }
-            //     // }
-            //     bidDetailsDiv.appendChild(bidButton);
-            // }
-
-                // Append bid details to main container
-                card.appendChild(shipmentIdDiv);
-                // card.appendChild(bidDetailsDiv);
-
-                // Append main container to the body or any desired parent element
-
-                container.appendChild(card);
-                closeLoader()
-            })
-            .catch(error => console.error('Error fetching bids:', error));
-    })
-    .catch(error => console.error('Error fetching data:', error));
+function formatAddress(address) {
+    return `${address.streetAddress} ${address.city} ${address.state}`;
 }

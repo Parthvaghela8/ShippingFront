@@ -26,11 +26,62 @@ footer {
     display: flex;
     justify-content: center;
 }
+.container-card-final{
+    max-width: 50%;
+    margin: auto;
+    margin-bottom: 100px;
+}
 
 .container-card{
     margin-bottom: 3.75em;
 }
 
+.shipment-card-final {
+    /* Vertically center the content */
+    align-items: center;
+    border: 0.0625em solid #ddd;
+    padding: 0.625em;
+    margin: 0.625em;
+    background-color: white;
+    border: #555;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 1s;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, 
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.shipment-card-final span {
+    margin-bottom: 0.3125em;
+    font-weight: bold;
+    color: rgb(73, 63, 63);
+}
+
+
+.shipment-card-final img {
+    width: 100%;
+    height: auto;
+    transition: transform 1s;
+
+}
+.shipment-card-final:hover img{
+    transform: scale(1.1);
+}
+
+.shipment-card-final h3 {
+    font-size: 1.125em;
+    margin-bottom: 0.3125em;
+}
+
+.shipment-card-final p {
+    font-size: 0.875em;
+    color: #555;
+}
+
+.shipment-card-final a {
+    cursor: pointer;
+}
 .shipment-card {
     /* Vertically center the content */
     align-items: center;
