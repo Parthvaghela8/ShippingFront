@@ -11,6 +11,10 @@ const apiUrl = `${API_RUN}api/shipments/getdata`;
 export function YourShipments() {
     openLoader()
     container.innerHTML = ""
+    const filterContainer = document.getElementById("filter-container");
+    filterContainer.innerHTML=''
+    const filterInputContainer = document.getElementById("filter-input-container");
+    filterInputContainer.innerHTML=''
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {

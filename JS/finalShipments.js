@@ -6,6 +6,10 @@ const container = document.getElementById('cards-container');
 export function finalShipments(shipmentId) {
     // Fetch data for the clicked shipment
     openLoader();
+    const filterContainer = document.getElementById("filter-container");
+    filterContainer.innerHTML=''
+    const filterInputContainer = document.getElementById("filter-input-container");
+    filterInputContainer.innerHTML=''
     fetch(`${API_RUN}api/shipments/${shipmentId}`)
         .then(response => {
             if (!response.ok) {
