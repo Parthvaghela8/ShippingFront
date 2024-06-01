@@ -1,5 +1,6 @@
 import { API_RUN } from './URLCollention.js';
 import { closeLoader, openLoader } from './home.js';
+import { fetchOptions } from "./login.js";
 
 const container = document.getElementById('cards-container');
 
@@ -10,7 +11,7 @@ export function finalShipments(shipmentId) {
     filterContainer.innerHTML=''
     const filterInputContainer = document.getElementById("filter-input-container");
     filterInputContainer.innerHTML=''
-    fetch(`${API_RUN}api/shipments/${shipmentId}`)
+    fetch(`${API_RUN}api/shipments/${shipmentId}`,fetchOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -19,7 +20,7 @@ export function finalShipments(shipmentId) {
         })
         .then(data => {
             // Fetch last bid for the shipment
-            fetch(`${API_RUN}api/bids/shipment/${shipmentId}`)
+            fetch(`${API_RUN}api/bids/shipment/${shipmentId}`,fetchOptions)
                 .then(response => {
                     if (!response.ok) {
                         if (response.status === 404) {
@@ -93,10 +94,10 @@ export function finalShipments(shipmentId) {
 }
 
 // Sample array of shipmentIds
-const shipmentIds = ['shipmentId1', 'shipmentId2', 'shipmentId3'];
+// const shipmentIds = ['shipmentId1', 'shipmentId2', 'shipmentId3'];
 
 // Iterate over shipmentIds and call finalShipments function for each
-shipmentIds.forEach(shipmentId => finalShipments(shipmentId));
+// shipmentIds.forEach(shipmentId => finalShipments(shipmentId));
 
 // Utility functions formatDate and formatAddress remain the same
 function formatDate(timestamp) {

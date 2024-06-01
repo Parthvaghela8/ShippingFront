@@ -1,6 +1,9 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { finalShipments } from './finalShipments.js';
 import { closeLoader, openLoader } from './home.js';
+import { fetchOptions } from "./login.js";
+
+
 const container = document.getElementById('cards-container');
 
 
@@ -8,7 +11,7 @@ export function getFinalShipperDetails() {
   // debugger;
   container.innerHTML=""
   openLoader()
-    fetch(`${API_RUN}api/finalshippers/shipments/all`)
+    fetch(`${API_RUN}api/finalshippers/shipments/all`,fetchOptions)
     .then(response => {
       if (!response.ok) {
         throw new Error('Failed to fetch shipments');

@@ -1,4 +1,6 @@
 import { API_RUN } from "./URLCollention.js";
+import { fetchOptions } from "./login.js";
+
 
 export async function updateShipmentStatus(shipmentId, newStatus) {
     // Endpoint URL
@@ -13,6 +15,7 @@ export async function updateShipmentStatus(shipmentId, newStatus) {
     const options = {
         method: 'PUT',
         headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(requestBody)

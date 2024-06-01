@@ -2,7 +2,7 @@ import { logout } from './Logout.js';
 import { createShipmentForm } from './shipmentform.js';
 import { AllShipments } from './index.js';
 import { YourShipments } from './yourShipments.js';
-
+import { fetchOptions } from "./login.js";
 
 
 export function createCustomerNavbar() {

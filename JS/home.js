@@ -5,6 +5,7 @@ import { addCustomer } from './getCustomer.js';
 import { addShipper } from './getShipper.js';
 import { createCustomerNavbar } from './customerNav.js';
 import { createShipperNavbar } from './shipperNav.js';
+import { fetchOptions } from "./login.js";
 
 async function addUserAndFetchDetails(email) {
     try {
@@ -83,16 +84,13 @@ export async function startCall() {
     const code = await parseTokenFromUrl();
 
     if (localStorage.getItem('token') && localStorage.getItem('flag') && localStorage.getItem('userEmail')) {
-        console.log("Please Redirect Me Baby");
+        console.log("Please Redirect Me");
         const email = localStorage.getItem('userEmail');
-        // const email="123@email.com"
+  
         if (localStorage.getItem('flag') == 0) {
 
             // login();   
             console.log("customer")
-
-            // Replace 'your-email@example.com' with the email you want to fetch
-            
 
             // Fetch the user data using the email
             addUserAndFetchDetails(email)

@@ -1,12 +1,14 @@
 import { API_RUN } from "./URLCollention.js";
 import { openModal } from "./popup.js";
 import { YourShipments } from "./yourShipments.js";
+import { fetchOptions } from "./login.js";
 
 
 export async function deleteShipment(id) {
     try {
       const response = await fetch(`${API_RUN}api/shipments/delete/${id}`, {
         method: "DELETE",
+        fetchOptions
       });
   
       if (response.ok) {

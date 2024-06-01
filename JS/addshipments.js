@@ -2,7 +2,9 @@
 import { WEB_RUN, API_RUN } from './URLCollention.js'
 import { openModal } from './popup.js';
 import { AllShipments } from './index.js';
-import { openLoader , closeLoader } from './home.js';
+import { openLoader, closeLoader } from './home.js';
+import { fetchOptions } from "./login.js";
+
 
 
 export function submitForm() {
@@ -103,6 +105,7 @@ export function submitForm() {
                 fetch(`${API_RUN}api/shipments/save`, {
                   method: 'POST',
                   headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
                   },
                   body: JSON.stringify(formData)
@@ -178,6 +181,9 @@ export function uploadFile() {
 
     fetch(`${API_RUN}api/image/upload`, {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
       body: formData,
     })
       .then((response) => {
@@ -216,6 +222,7 @@ export function submitAddress(form, address, city, state, postalCode) {
     fetch(`${API_RUN}api/addresses/save`, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
       body: jsonData,

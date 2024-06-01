@@ -2,6 +2,7 @@ import { createInput } from './addshipments.js';
 import { submitForm } from './addshipments.js';
 import { createLabel } from './addshipments.js';
 import { openModal } from './popup.js';
+import { fetchOptions } from "./login.js";
 
 const container = document.getElementById('cards-container');
 

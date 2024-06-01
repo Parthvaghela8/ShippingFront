@@ -1,8 +1,9 @@
 import { API_RUN } from './URLCollention.js';
+import { fetchOptions } from "./login.js";
 
 export async function addUser(email) {
   try {
-    const response = await fetch(`${API_RUN}api/users/email/${email}`);
+    const response = await fetch(`${API_RUN}api/users/email/${email}`,fetchOptions);
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -10,6 +11,7 @@ export async function addUser(email) {
         const addUserResponse = await fetch(`${API_RUN}api/users/save`, {
           method: 'POST',
           headers: {
+             Authorization: `Bearer ${localStorage.getItem("token")}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ email: email }),

@@ -2,6 +2,7 @@ import { WEB_RUN, API_RUN } from "./URLCollention.js";
 import { closeLoader, openLoader } from "./home.js";
 import { handleCardClick } from "./shipment.js";
 import { updateShipmentStatus } from "./updateShipmentStatus.js";
+import { fetchOptions } from "./login.js";
 
 const container = document.getElementById("cards-container");
 const apiUrl = `${API_RUN}api/shipments/getdata`;
@@ -11,7 +12,7 @@ let data; // Declare data variable here
 export function AllShipments() {
   openLoader();
   container.innerHTML = "";
-  fetch(apiUrl)
+  fetch(apiUrl,fetchOptions)
     .then((response) => response.json())
     .then((responseData) => { // Rename data variable to avoid conflict
       data = responseData; // Assign data to the variable declared outside
@@ -235,26 +236,49 @@ filterSelect.addEventListener("change", function () {
     .catch((error) => console.error("Error fetching data:", error));
 }
 
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Filter UI elements
+//   const filterSelect = document.getElementById("filter-select");
+//   const filterDateInput = document.getElementById("filter-date");
+//   const filterAmountInput = document.getElementById("filter-amount");
+// //   const applyFilterBtn = document.getElementById("apply-filter");
+
+//   filterSelect.addEventListener("change", function () {
+//     const selectedValue = filterSelect.value;
+//     if (selectedValue === "shipmentDate" || selectedValue === "deliveryDate") {
+//       filterDateInput.style.display = "inline-block";
+//       filterAmountInput.style.display = "none";
+//     } else if (selectedValue === "maxBidAmount") {
+//       filterDateInput.style.display = "none";
+//       filterAmountInput.style.display = "inline-block";
+//     }
+//   });
+
+
+// });
+
 document.addEventListener("DOMContentLoaded", function () {
   // Filter UI elements
   const filterSelect = document.getElementById("filter-select");
   const filterDateInput = document.getElementById("filter-date");
   const filterAmountInput = document.getElementById("filter-amount");
-//   const applyFilterBtn = document.getElementById("apply-filter");
+  //   const applyFilterBtn = document.getElementById("apply-filter");
 
-  filterSelect.addEventListener("change", function () {
-    const selectedValue = filterSelect.value;
-    if (selectedValue === "shipmentDate" || selectedValue === "deliveryDate") {
-      filterDateInput.style.display = "inline-block";
-      filterAmountInput.style.display = "none";
-    } else if (selectedValue === "maxBidAmount") {
-      filterDateInput.style.display = "none";
-      filterAmountInput.style.display = "inline-block";
-    }
-  });
-
-
+  // Check if filterSelect exists before adding the event listener
+  if (filterSelect) {
+    filterSelect.addEventListener("change", function () {
+      const selectedValue = filterSelect.value;
+      if (selectedValue === "shipmentDate" || selectedValue === "deliveryDate") {
+        filterDateInput.style.display = "inline-block";
+        filterAmountInput.style.display = "none";
+      } else if (selectedValue === "maxBidAmount") {
+        filterDateInput.style.display = "none";
+        filterAmountInput.style.display = "inline-block";
+      }
+    });
+  }
 });
+
 
 function filterShipments(filterBy, filterValue) {
     // debugger;

@@ -3,6 +3,7 @@ import { handleCardClick } from './shipment.js';
 import { deleteShipment } from './deleteShipment.js';
 import { deleteBids } from './deleteBids.js';
 import { closeLoader, openLoader } from './home.js';
+import { fetchOptions } from "./login.js";
 
 const container = document.getElementById('cards-container');
 const apiUrl = `${API_RUN}api/shipments/getdata`;
@@ -15,7 +16,7 @@ export function YourShipments() {
     filterContainer.innerHTML=''
     const filterInputContainer = document.getElementById("filter-input-container");
     filterInputContainer.innerHTML=''
-    fetch(apiUrl)
+    fetch(apiUrl,fetchOptions)
         .then(response => response.json())
         .then(data => {
            

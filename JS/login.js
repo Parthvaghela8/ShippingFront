@@ -24,7 +24,7 @@ export async function parseTokenFromUrl() {
 }
 
 
-const fetchOptions = {
+export const fetchOptions = {
     headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",

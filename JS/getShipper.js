@@ -1,10 +1,11 @@
 import { WEB_RUN, API_RUN } from './URLCollention.js'
 import { startCall } from './home.js';
+import { fetchOptions } from "./login.js";
 
 export async function addShipper(userId) {
     try {
         // Attempt to fetch shipper details
-        const response = await fetch(`${API_RUN}api/shippers/details/${userId}`);
+        const response = await fetch(`${API_RUN}api/shippers/details/${userId}`,fetchOptions);
 
         if (!response.ok) {
             if (response.status === 404) {
@@ -12,6 +13,7 @@ export async function addShipper(userId) {
                 const addShipperResponse = await fetch(`${API_RUN}api/shippers/save`, {
                     method: 'POST',
                     headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ userId: userId }),

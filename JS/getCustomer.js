@@ -1,17 +1,19 @@
 import { WEB_RUN , API_RUN } from './URLCollention.js'
 import { startCall } from './home.js';
+import { fetchOptions } from "./login.js";
 
 export async function addCustomer(userId) {
     try {
       // Attempt to fetch customer details
-      const response = await fetch(`${API_RUN}api/customers/details/${userId}`);
+      const response = await fetch(`${API_RUN}api/customers/details/${userId}`,fetchOptions);
   
       if (!response.ok) {
         if (response.status === 404) {
           // If customer not found, add the customer
           const addCustomerResponse = await fetch(`${API_RUN}api/customers/save`, {
             method: 'POST',
-            headers: {
+            headers: { 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ userId: userId }),

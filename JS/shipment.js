@@ -1,5 +1,6 @@
 import { WEB_RUN, API_RUN } from './URLCollention.js'
 import { submitBid } from './submitBid.js';
+import { fetchOptions } from "./login.js";
 
 const container = document.getElementById('cards-container');
 var modal = document.getElementById("myModal");
@@ -29,7 +30,7 @@ window.onclick = function (event) {
 export function handleCardClick(shipmentId) {
     // Fetch data for the clicked shipment
 
-    fetch(`${API_RUN}api/shipments/${shipmentId}`)
+    fetch(`${API_RUN}api/shipments/${shipmentId}`,fetchOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -38,7 +39,7 @@ export function handleCardClick(shipmentId) {
         })
         .then(data => {
             // Fetch last bid for the shipment
-            fetch(`${API_RUN}api/bids/shipment/${shipmentId}`)
+            fetch(`${API_RUN}api/bids/shipment/${shipmentId}`,fetchOptions)
                 .then(response => {
                     if (!response.ok) {
                         if (response.status === 404) {
