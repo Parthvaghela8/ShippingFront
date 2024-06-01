@@ -82,12 +82,12 @@ export function createCustomerNavbar() {
     ul.appendChild(liLogin);
 
     // Create navbar-toggle div
-    const navbarToggle = document.createElement('div');
+    const navbarToggle = document.createElement('ul');
     navbarToggle.classList.add('navbar-toggle');
 
     // Create bars inside navbar-toggle div
     for (let i = 0; i < 3; i++) {
-        const bar = document.createElement('div');
+        const bar = document.createElement('li');
         bar.classList.add('bar');
         navbarToggle.appendChild(bar);
     }

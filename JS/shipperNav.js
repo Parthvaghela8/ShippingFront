@@ -36,7 +36,7 @@ export function createShipperNavbar() {
     const liAllShipments = document.createElement('li');
     liAllShipments.onclick = AllShipments;
     const aAllShipments = document.createElement('a');
-    aAllShipments.textContent = 'ALL shipments';
+    aAllShipments.textContent = 'All Shipments';
     liAllShipments.appendChild(aAllShipments);
 
     // const liAddShipments = document.createElement('li');
@@ -65,12 +65,12 @@ export function createShipperNavbar() {
     ul.appendChild(liLogout);
 
     // Create navbar-toggle div
-    const navbarToggle = document.createElement('div');
+    const navbarToggle = document.createElement('ul');
     navbarToggle.classList.add('navbar-toggle');
 
     // Create bars inside navbar-toggle div
     for (let i = 0; i < 3; i++) {
-        const bar = document.createElement('div');
+        const bar = document.createElement('li');
         bar.classList.add('bar');
         navbarToggle.appendChild(bar);
     }
