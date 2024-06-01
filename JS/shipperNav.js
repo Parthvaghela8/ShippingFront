@@ -7,6 +7,12 @@ import { fetchOptions } from "./login.js";
 
 export function createShipperNavbar() {
     // Create container div
+    
+    // Clear the container if it has any existing children
+    while (navbarContainer.firstChild) {
+        navbarContainer.removeChild(navbarContainer.firstChild);
+    }
+    
     const containerDiv = document.createElement('div');
     containerDiv.classList.add('container');
 
