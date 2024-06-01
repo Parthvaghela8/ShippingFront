@@ -179,7 +179,7 @@ export function handleCardClick(shipmentId) {
                                         submitBid(data.shipment.shipmentId, bidAmount);
                                     }
                                     else {
-                                        alert("Please place a proper bid")
+                                        openModal("Please place a proper bid")
                                     }
                                 } else {
                                     console.log("hii")

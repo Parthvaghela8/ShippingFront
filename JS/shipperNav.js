@@ -7,12 +7,13 @@ import { fetchOptions } from "./login.js";
 
 export function createShipperNavbar() {
     // Create container div
+    const navbarContainer = document.querySelector('.navbar');
     
     // Clear the container if it has any existing children
     while (navbarContainer.firstChild) {
         navbarContainer.removeChild(navbarContainer.firstChild);
     }
-    
+
     const containerDiv = document.createElement('div');
     containerDiv.classList.add('container');
 
@@ -56,7 +57,7 @@ export function createShipperNavbar() {
     const liYourShipments = document.createElement('li');
     liYourShipments.onclick = getFinalShipperDetails    ;
     const aYourShipments = document.createElement('a');
-    aYourShipments.textContent = 'Your Shipments';
+    aYourShipments.textContent = 'My Shipments';
     liYourShipments.appendChild(aYourShipments);
 
     const liLogout = document.createElement('li');
@@ -90,7 +91,7 @@ export function createShipperNavbar() {
     containerDiv.appendChild(navbarToggle);
 
     // Append container div to navbarContainer
-    const navbarContainer = document.querySelector('.navbar');
+    
     navbarContainer.appendChild(containerDiv);
 
     // Add event listener to navbar-toggle
