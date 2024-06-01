@@ -30,6 +30,7 @@
 .navbar-toggle {
     display: none;
     cursor: pointer;
+    list-style: none;
 }
 
 .bar {
