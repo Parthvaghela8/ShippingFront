@@ -8,7 +8,10 @@ export async function deleteShipment(id) {
     try {
       const response = await fetch(`${API_RUN}api/shipments/delete/${id}`, {
         method: "DELETE",
-        fetchOptions
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+          // "Content-Type": "application/json",
+      },
       });
   
       if (response.ok) {
