@@ -3,10 +3,10 @@ import { createHomePage, startCall } from "./home.js";
 import { fetchOptions } from "./login.js";
 
 export function logout() {
-          
+
     localStorage.clear();
     const filterContainer = document.getElementById("filter-container");
-    filterContainer.innerHTML=''
+    filterContainer.innerHTML = ''
     const filterInputContainer = document.getElementById("filter-input-container");
     filterInputContainer.innerHTML
     // Clear session storage
@@ -15,7 +15,7 @@ export function logout() {
     alert('Logging out...');
 
     // window.location.href = WEB_RUN;
-    
+
     const navbarContainer = document.querySelector('.navbar');
     navbarContainer.innerHTML = '';
 

@@ -27,10 +27,8 @@ export function YourShipments() {
             Heading.classList.add('heading');
             Heading.innerHTML = `Your Shipments`
             data.map(shipment => {
-                console.log(shipment.customer.customerId);
                 // debugger;
                 if (shipment.customer.customerId == localStorage.getItem('customerId')) {
-                    console.log(shipment.shipment.shipmentId, 'dvs');
                     const card = document.createElement('div');
                     card.classList.add('shipment-card');
                     // Assuming 'shipment' is available in the current context

@@ -128,13 +128,6 @@ export async function startCall() {
             // window.location.href = "./JS/Shipper.html"
         }
     }
-    
-    if (code) {
-        console.log(code);
-        const currentUrl = new URL(window.location.href);
-        localStorage.setItem("aftercodeurl",currentUrl);
-    }
-
 
     if (code && !localStorage.getItem('token')) {
         await checkAndSetToken();

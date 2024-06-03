@@ -4,7 +4,6 @@ import { closeLoader, openLoader } from './home.js';
 async function getTokenFromCode(code) {
     openLoader()
     const url = `${API_RUN}auth/code?code=${code}&flag=${localStorage.getItem('flag')}`;
-    localStorage.setItem("gettokenurl",url);
     let Token = await fetch(url)
         .then((response) => response.text())
         .catch((error) => {
@@ -55,10 +54,6 @@ export function GitLogin(flag) {
 
     localStorage.setItem("flag", flag);
 
-    localStorage.setItem("authurl",authUrl);
-
-    console.log(authUrl);
-
     // Redirect user to Google OAuth URL
     window.location.href = authUrl;
 }
@@ -95,7 +90,7 @@ export async function GitFech() {
                 localStorage.removeItem("userEmail");
                 localStorage.setItem("userEmail", useremail);
                 console.log("First email stored in localStorage:", useremail);
-                
+
                 window.location.href = WEB_RUN;
             } else {
                 console.error("No emails found in the response or response is not an array");
@@ -104,6 +99,6 @@ export async function GitFech() {
         .catch((error) => {
             console.error("Error fetching emails:", error);
         });
-        closeLoader()
-    }
+    closeLoader()
+}
 

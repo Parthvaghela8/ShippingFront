@@ -12,7 +12,7 @@ let data; // Declare data variable here
 export function AllShipments() {
   openLoader();
   container.innerHTML = "";
-  fetch(apiUrl,fetchOptions)
+  fetch(apiUrl, fetchOptions)
     .then((response) => response.json())
     .then((responseData) => { // Rename data variable to avoid conflict
       data = responseData; // Assign data to the variable declared outside
@@ -33,46 +33,46 @@ export function AllShipments() {
     <option value="maxBidAmount">Max Bid Amount</option>
 `;
 
-filterSelect.addEventListener("change", function () {
-    const selectedValue = filterSelect.value;
-    const filterInputContainer = document.getElementById("filter-input-container");
-    filterInputContainer.innerHTML = ""; // Clear previous input elements
-  
-    // Create the appropriate input element based on the selected value
-    if (selectedValue === "maxBidAmount") {
-      const filterInput = document.createElement("input");
-      filterInput.id = "filter-input";
-      filterInput.type = "number";
-      filterInput.placeholder = "Enter max bid amount";
-      filterInputContainer.appendChild(filterInput);
-    } else {
-      const filterInput = document.createElement("input");
-      filterInput.id = "filter-input";
-      filterInput.type = "date"; // Assuming other options are for dates
-      filterInputContainer.appendChild(filterInput);
-    }
-  });
-  
+      filterSelect.addEventListener("change", function () {
+        const selectedValue = filterSelect.value;
+        const filterInputContainer = document.getElementById("filter-input-container");
+        filterInputContainer.innerHTML = ""; // Clear previous input elements
+
+        // Create the appropriate input element based on the selected value
+        if (selectedValue === "maxBidAmount") {
+          const filterInput = document.createElement("input");
+          filterInput.id = "filter-input";
+          filterInput.type = "number";
+          filterInput.placeholder = "Enter max bid amount";
+          filterInputContainer.appendChild(filterInput);
+        } else {
+          const filterInput = document.createElement("input");
+          filterInput.id = "filter-input";
+          filterInput.type = "date"; // Assuming other options are for dates
+          filterInputContainer.appendChild(filterInput);
+        }
+      });
+
 
       const applyFilterBtn = document.createElement("button");
       applyFilterBtn.textContent = "Apply Filter";
-      applyFilterBtn.classList='filter-button';
-    //   debugger
+      applyFilterBtn.classList = 'filter-button';
+      //   debugger
       applyFilterBtn.addEventListener("click", function () {
-        const filterInput=document.getElementById("filter-input")
+        const filterInput = document.getElementById("filter-input")
         const selectedValue = filterSelect.value;
-        const filterValue = selectedValue === "shipmentDate" || selectedValue === "deliveryDate" 
-            ? filterInput.value // Use text input for date filter options
-            : parseInt(filterInput.value); 
-            console.log(filterInput.value);// Convert input value to number for amount filter option
+        const filterValue = selectedValue === "shipmentDate" || selectedValue === "deliveryDate"
+          ? filterInput.value // Use text input for date filter options
+          : parseInt(filterInput.value);
+        console.log(filterInput.value);// Convert input value to number for amount filter option
         filterShipments(selectedValue, filterValue);
-    });
-    
+      });
+
       // Append filter UI elements to a container element
       const filterContainer = document.getElementById("filter-container");
-      filterContainer.innerHTML=''
+      filterContainer.innerHTML = ''
       filterContainer.appendChild(filterSelect);
-    //   filterContainer.appendChild(filterInput);
+      //   filterContainer.appendChild(filterInput);
       filterContainer.appendChild(applyFilterBtn);
 
       data.map((shipment) => {
@@ -281,23 +281,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function filterShipments(filterBy, filterValue) {
-    // debugger;
-    // Convert filterValue to date-time local format
-    const filterDate = new Date(filterValue).toISOString().slice(0, 16);
+  // debugger;
+  // Convert filterValue to date-time local format
+  const filterDate = new Date(filterValue).toISOString().slice(0, 16);
 
-    const filteredData = data.filter((shipment) => {
-        if (filterBy === "shipmentDate") {
-            const shipmentDate = new Date(shipment.shipment.shipmentDate).toISOString().slice(0, 16);
-            return shipmentDate >= filterDate; // Filter shipments with dates greater than or equal to filterDate
-        } else if (filterBy === "deliveryDate") {
-            const deliveryDate = new Date(shipment.shipment.deliveryDate).toISOString().slice(0, 16);
-            return deliveryDate >= filterDate; // Filter shipments with dates greater than or equal to filterDate
-        } else if (filterBy === "maxBidAmount") {
-            return shipment.shipment.maxBidAmount <= parseInt(filterValue); // Filter shipments with max bid amount greater than or equal to filterValue
-        }
-    });
+  const filteredData = data.filter((shipment) => {
+    if (filterBy === "shipmentDate") {
+      const shipmentDate = new Date(shipment.shipment.shipmentDate).toISOString().slice(0, 16);
+      return shipmentDate >= filterDate; // Filter shipments with dates greater than or equal to filterDate
+    } else if (filterBy === "deliveryDate") {
+      const deliveryDate = new Date(shipment.shipment.deliveryDate).toISOString().slice(0, 16);
+      return deliveryDate >= filterDate; // Filter shipments with dates greater than or equal to filterDate
+    } else if (filterBy === "maxBidAmount") {
+      return shipment.shipment.maxBidAmount <= parseInt(filterValue); // Filter shipments with max bid amount greater than or equal to filterValue
+    }
+  });
 
-    renderFilteredData(filteredData);
+  renderFilteredData(filteredData);
 }
 
 
@@ -333,7 +333,7 @@ function renderFilteredData(filteredData) {
     const content = document.createElement("div");
     content.classList.add("content");
 
-    
+
     // Create span elements for shipment details
     const pickupDateSpan = document.createElement("span");
     pickupDateSpan.textContent = "PickUp Date:";
